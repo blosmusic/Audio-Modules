@@ -1,11 +1,17 @@
 class Meter {
   constructor(minDecibels, maxDecibels, meterElementId, dbElementId) {
+    this.input = new Tone.Gain();
     this.minDecibels = minDecibels;
     this.maxDecibels = maxDecibels;
     this.meterElement = document.getElementById(meterElementId);
     this.dbElement = document.getElementById(dbElementId);
     this.meter = new Tone.Meter(0.8);
     this.animationFrameId = null;
+    this.output = new Tone.Gain();
+
+    // Connect the moduule nodes
+    this.input = this.meter;
+    this.meter.connect(this.output);
   }
 
   updateMeter() {
@@ -19,7 +25,7 @@ class Meter {
     // Adjust meter height based on the normalized value
     const meterHeight = clampedValue * 100 + "%";
     this.meterElement.style.height = meterHeight;
-    
+
     // Change meter color based on signal strength
     if (clampedValue > 0.95) {
       this.meterElement.style.backgroundColor = "red";
@@ -43,6 +49,14 @@ class Meter {
 
   stop() {
     cancelAnimationFrame(this.animationFrameId);
+  }
+
+  connect(destination) {
+    this.output.connect(destination || destination.input);
+  }
+
+  disconnect() {
+    this.output.disconnect();
   }
 }
 

@@ -1,19 +1,23 @@
 class DistortionFXModule {
   constructor(distortionAmount, lowGain, midGain, highGain, outputGain) {
-
     // Create components
-    this.distortion = new Tone.Distortion(distortionAmount);
+    this.input = new Tone.Gain(1);
+    this.distortion = new Tone.Distortion({
+        distortion: distortionAmount,
+        oversample: "2x",
+        wet: 1,
+    });
     this.eq = new Tone.EQ3(lowGain, midGain, highGain);
     this.gain = new Tone.Gain(outputGain);
+    this.output = this.gain;
 
     // Connect the components
+    this.input.connect(this.distortion);
     this.distortion.connect(this.eq);
     this.eq.connect(this.gain);
-    
   }
 
   // Setters for the parameters
-
   set distortionAmount(value) {
     this.distortion.distortion = value;
   }
@@ -32,6 +36,16 @@ class DistortionFXModule {
 
   set outputGain(value) {
     this.gain.gain.value = value;
+  }
+
+  // Connect the effect to the audio chain
+  connect(destination) {
+    this.output.connect(destination || destination.input);
+  }
+
+  // Disconnect the effect from the audio chain
+  disconnect() {
+    this.output.disconnect();
   }
 }
 
