@@ -19,7 +19,7 @@ class Meter {
     // Adjust meter height based on the normalized value
     const meterHeight = clampedValue * 100 + "%";
     this.meterElement.style.height = meterHeight;
-    console.log(meterHeight);
+    
     // Change meter color based on signal strength
     if (clampedValue > 0.95) {
       this.meterElement.style.backgroundColor = "red";
