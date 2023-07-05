@@ -17,8 +17,8 @@ const inputMeter = new Meter(-100, 0, "input-meter", "input-db-value");
 const outputMeter = new Meter(-100, 0, "output-meter", "output-db-value");
 
 // FX Module Setup
-const gainNode = new Tone.Gain(1);
-const distortionFX = new DistortionFXModule(0.5);
+const gainNode = new Tone.Gain(0.5);
+const distortionFX = new DistortionFXModule(0.5, 0, 0, 10, 1);
 
 async function main() {
   // Start the audio context
@@ -31,10 +31,11 @@ async function main() {
     // Connect the audio source to the meter
     audioSource.connect(monoSignal);
     monoSignal.connect(inputMeter.meter);
-    inputMeter.meter.connect(distortionFX.input);
-
+    inputMeter.meter.connect(distortionFX.distortion);
+    // inputMeter.meter.connect(gainNode); 
+    // gainNode.connect(outputMeter.meter);
     // Connect the audio source to the output
-    distortionFX.connect(outputMeter.meter);
+    distortionFX.gain.connect(outputMeter.meter);
     outputMeter.meter.connect(destination);
 
     // Start the meter update loops

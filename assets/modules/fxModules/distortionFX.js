@@ -1,41 +1,37 @@
 class DistortionFXModule {
-  constructor(distortionAmount) {
-    // Create components
-    this.input = new Tone.Gain();
-    this.output = new Tone.Gain();
-    this.distortionAmount = new Tone.Signal(distortionAmount);
+  constructor(distortionAmount, lowGain, midGain, highGain, outputGain) {
 
-    // Create WaveShaper node
-    this.waveShaper = new Tone.WaveShaper(this.applyDistortion.bind(this));
+    // Create components
+    this.distortion = new Tone.Distortion(distortionAmount);
+    this.eq = new Tone.EQ3(lowGain, midGain, highGain);
+    this.gain = new Tone.Gain(outputGain);
 
     // Connect the components
-    this.input.chain(this.waveShaper, this.output);
-
-    // Set default parameters
-    this.distortionAmount.setValueAtTime(distortionAmount, Tone.now());
-  }
-
-  // Function to apply distortion
-  applyDistortion(input) {
-    const distortion = this.distortionAmount.value;
-    const k = (2 * distortion) / (1 - distortion);
-    return ((1 + k) * input) / (1 + k * Math.abs(input));
+    this.distortion.connect(this.eq);
+    this.eq.connect(this.gain);
+    
   }
 
   // Setters for the parameters
 
   set distortionAmount(value) {
-    this.distortionAmount.setValueAtTime(value, Tone.now());
+    this.distortion.distortion = value;
   }
 
-  // Connect the effect to the audio nodes
-  connect(destination) {
-    this.output.connect(destination);
+  set lowGain(value) {
+    this.eq.low.value = value;
   }
 
-  // Disconnect the effect from the audio nodes
-  disconnect() {
-    this.output.disconnect();
+  set midGain(value) {
+    this.eq.mid.value = value;
+  }
+
+  set highGain(value) {
+    this.eq.high.value = value;
+  }
+
+  set outputGain(value) {
+    this.gain.gain.value = value;
   }
 }
 
