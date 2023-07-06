@@ -1,11 +1,12 @@
 class SliderParameters {
-  constructor(name, minValue, maxValue, step, defaultValue) {
+  constructor(name, minValue, maxValue, step, defaultValue, labelName) {
     this.name = name;
     this.minValue = minValue;
     this.maxValue = maxValue;
     this.step = step;
     this.value = defaultValue; // Store the current value
     this.sliderElement = null; // Reference to the slider element
+    this.labelName = labelName; // Reference to the label element
   }
 
   createSlider() {
@@ -13,7 +14,7 @@ class SliderParameters {
     sliderContainer.classList.add("slider-container");
 
     const labelElement = document.createElement("label");
-    labelElement.textContent = this.name;
+    labelElement.textContent = this.labelName;
     sliderContainer.appendChild(labelElement);
 
     const sliderWrapper = document.createElement("div");

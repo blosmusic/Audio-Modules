@@ -19,9 +19,9 @@ const inputMeter = new Meter(-100, 0, "input-meter", "input-db-value");
 const outputMeter = new Meter(-100, 0, "output-meter", "output-db-value");
 
 // FX Module Setup
-const dirtValue = new SliderParameters("distortion", 0, 1, 0.01, 0.5);
-const dirtTreble = new SliderParameters("highGain", 0, 10, 0.01, 0);
-const dirtGain = new SliderParameters("outputGain", 0, 1, 0.01, 0.5);
+const dirtValue = new SliderParameters("distortion", 0, 1, 0.01, 0.5, "distortion");
+const dirtTreble = new SliderParameters("highGain", 0, 10, 0.01, 0, "treble");
+const dirtGain = new SliderParameters("outputGain", 0, 1, 0.01, 0.5, "gain");
 const dirtValueSlider = dirtValue.createSlider();
 const dirtTrebleSlider = dirtTreble.createSlider();
 const dirtGainSlider = dirtGain.createSlider();
@@ -61,26 +61,14 @@ const distortionFX = new DistortionFXModule(
   });
 
   dirtSwitch.button.addEventListener("click", () => {
-    console.log("Button clicked:", dirtSwitch.on);
+    // console.log("Button clicked:", dirtSwitch.on);
     if (dirtSwitch.on) {
-      // distortionFX.setParameter("bypass", dirtSwitch.on); // will need to be a bypass function not mute
+  
       distortionFX.distortion.wet.value = 0;
     } else {
-      // distortionFX.setParameter("outputGain", dirtGain.value);
       distortionFX.distortion.wet.value = 1;
     }
   });
-
-  // dirtSwitch.button.addEventListener("click", () => {
-  //   console.log("Button clicked:", dirtSwitch.on);
-  //   bypass = !bypass;
-  //   distortionFX.wet.value = 1;
-  //   distortionFX.setParameter("bypass", bypass);
-
-  //   if (bypass) {
-  //     distortionFX.wet.value = 0;
-  //   }
-  // });
 
 // Main function
 async function main() {
