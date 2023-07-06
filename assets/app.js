@@ -63,7 +63,7 @@ const distortionFX = new DistortionFXModule(
   dirtSwitch.button.addEventListener("click", () => {
     console.log("Button clicked:", dirtSwitch.on);
     if (dirtSwitch.on) {
-      distortionFX.setParameter("outputGain", 0);
+      distortionFX.setParameter("outputGain", 0); // will need to be a bypass function not mute
     } else {
       distortionFX.setParameter("outputGain", dirtGain.value);
     }
