@@ -6,6 +6,7 @@ class DistortionFXModule {
     id,
     title,
     colour,
+    inputGain,
     distortionAmount,
     lowGain,
     midGain,
@@ -13,21 +14,21 @@ class DistortionFXModule {
     outputGain
   ) {
     // Create components
-    this.input = new Tone.Gain();
+    this.input = new Tone.Gain(inputGain); //typically 0
     this.distortion = new Tone.Distortion({
       distortion: distortionAmount,
       oversample: "2x",
-      wet: 1,
+      wet: 1, // will be used to bypass
     });
     this.eq = new Tone.EQ3(lowGain, midGain, highGain);
-    this.gain = new Tone.Gain(outputGain);
-    this.output = new Tone.Gain();
+    this.output = new Tone.Gain(outputGain);
+    // this.output = new Tone.Gain();
 
     // Connect the components
     this.input.connect(this.distortion);
     this.distortion.connect(this.eq);
-    this.eq.connect(this.gain);
-    this.gain.connect(this.output);
+    this.eq.connect(this.output);
+    // this.gain.connect(this.output);
 
     // Attach the module to the HTML element with the provided id
     const moduleElement = document.getElementById(id);
@@ -45,6 +46,9 @@ class DistortionFXModule {
 
   setParameter(parameterName, value) {
     switch (parameterName) {
+      case "inputGain":
+        this.input.gain.value = value;
+        break;
       case "distortion":
         this.distortion.distortion = value;
         break;
@@ -58,7 +62,10 @@ class DistortionFXModule {
         this.eq.high.value = value;
         break;
       case "outputGain":
-        this.gain.gain.value = value;
+        this.output.gain.value = value;
+        break;
+      case "bypass":
+        this.bypass = value;
         break;
       default:
         console.error("Invalid parameter name:", parameterName);

@@ -37,7 +37,7 @@ const distortionFX = new DistortionFXModule(
   0.1,
   0.3,
   dirtTreble.value,
-  dirtGain.value
+  dirtGain.value,
 );
 
   document.getElementById("distortion-module").appendChild(dirtValueSlider);
@@ -63,12 +63,24 @@ const distortionFX = new DistortionFXModule(
   dirtSwitch.button.addEventListener("click", () => {
     console.log("Button clicked:", dirtSwitch.on);
     if (dirtSwitch.on) {
-      distortionFX.setParameter("outputGain", 0); // will need to be a bypass function not mute
+      // distortionFX.setParameter("bypass", dirtSwitch.on); // will need to be a bypass function not mute
+      distortionFX.distortion.wet.value = 0;
     } else {
-      distortionFX.setParameter("outputGain", dirtGain.value);
+      // distortionFX.setParameter("outputGain", dirtGain.value);
+      distortionFX.distortion.wet.value = 1;
     }
   });
 
+  // dirtSwitch.button.addEventListener("click", () => {
+  //   console.log("Button clicked:", dirtSwitch.on);
+  //   bypass = !bypass;
+  //   distortionFX.wet.value = 1;
+  //   distortionFX.setParameter("bypass", bypass);
+
+  //   if (bypass) {
+  //     distortionFX.wet.value = 0;
+  //   }
+  // });
 
 // Main function
 async function main() {
