@@ -26,6 +26,9 @@ const dirtValueSlider = dirtValue.createSlider();
 const dirtTrebleSlider = dirtTreble.createSlider();
 const dirtGainSlider = dirtGain.createSlider();
 
+const dirtSwitch = new ButtonSwitch("distortion");
+const dirtSwitchButton = dirtSwitch.createButton();
+
 const distortionFX = new DistortionFXModule(
   "distortion-module",
   "distortion",
@@ -40,6 +43,7 @@ const distortionFX = new DistortionFXModule(
   document.getElementById("distortion-module").appendChild(dirtValueSlider);
   document.getElementById("distortion-module").appendChild(dirtTrebleSlider);
   document.getElementById("distortion-module").appendChild(dirtGainSlider);
+  document.getElementById("distortion-module").appendChild(dirtSwitchButton);
   
   dirtValue.sliderElement.addEventListener("input", () => {
     // console.log("Slider value changed:", dirt.value);
@@ -55,6 +59,16 @@ const distortionFX = new DistortionFXModule(
     // console.log("Slider value changed:", dirt.value);
     distortionFX.setParameter("outputGain", dirtGain.value);
   });
+
+  dirtSwitch.button.addEventListener("click", () => {
+    console.log("Button clicked:", dirtSwitch.on);
+    if (dirtSwitch.on) {
+      distortionFX.setParameter("outputGain", 0);
+    } else {
+      distortionFX.setParameter("outputGain", dirtGain.value);
+    }
+  });
+
 
 // Main function
 async function main() {
