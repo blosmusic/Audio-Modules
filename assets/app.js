@@ -19,16 +19,42 @@ const inputMeter = new Meter(-100, 0, "input-meter", "input-db-value");
 const outputMeter = new Meter(-100, 0, "output-meter", "output-db-value");
 
 // FX Module Setup
+const dirtValue = new SliderParameters("distortion", 0, 1, 0.01, 0.5);
+const dirtTreble = new SliderParameters("highGain", 0, 10, 0.01, 0);
+const dirtGain = new SliderParameters("outputGain", 0, 1, 0.01, 0.5);
+const dirtValueSlider = dirtValue.createSlider();
+const dirtTrebleSlider = dirtTreble.createSlider();
+const dirtGainSlider = dirtGain.createSlider();
+
 const distortionFX = new DistortionFXModule(
   "distortion-module",
   "distortion",
-  "red",
-  0.3,
+  "green",
+  dirtValue.value,
   0.1,
-  0.5,
-  5,
-  1
+  0.3,
+  dirtTreble.value,
+  dirtGain.value
 );
+
+  document.getElementById("distortion-module").appendChild(dirtValueSlider);
+  document.getElementById("distortion-module").appendChild(dirtTrebleSlider);
+  document.getElementById("distortion-module").appendChild(dirtGainSlider);
+  
+  dirtValue.sliderElement.addEventListener("input", () => {
+    // console.log("Slider value changed:", dirt.value);
+    distortionFX.setParameter("distortion", dirtValue.value);
+  });
+
+  dirtTreble.sliderElement.addEventListener("input", () => {
+    // console.log("Slider value changed:", dirt.value);
+    distortionFX.setParameter("highGain", dirtTreble.value);
+  });
+
+  dirtGain.sliderElement.addEventListener("input", () => {
+    // console.log("Slider value changed:", dirt.value);
+    distortionFX.setParameter("outputGain", dirtGain.value);
+  });
 
 // Main function
 async function main() {

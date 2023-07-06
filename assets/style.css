@@ -26,7 +26,7 @@ h2 {
     color: #00ff91;
     background-color: #333;
     text-align: center;
-    border-radius: 25%;
+    border-radius: 12%;
     margin: 20px 0;
     padding: 10px;
     text-transform: uppercase;
@@ -49,6 +49,11 @@ label {
   text-align: center;
   text-transform: uppercase;
 }
+
+input[type="range"] {
+  width: 100%;
+  margin: 10px 0;
+} 
 
 .audio-container,
 .module-container {
@@ -145,10 +150,20 @@ label {
   vertical-align: text-top;
   flex-direction: column;
   border: 5px solid #333;
-  border-radius: 10%;
+  border-radius: 3%;
   padding: 20px;
   margin: 20px 10px;
   text-transform: uppercase;
+}
+
+.slider-container label {
+  font-size: 1.2rem;
+  font-weight: 800;
+  margin-right: 3px;
+  text-align: center;
+  text-transform: uppercase;
+  /* color: #00ff91;
+  background-color: #333; */
 }
 
 @media only screen and (max-width: 1200px) {

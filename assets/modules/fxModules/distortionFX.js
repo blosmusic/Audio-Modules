@@ -43,6 +43,29 @@ class DistortionFXModule {
     }
   }
 
+  setParameter(parameterName, value) {
+    switch (parameterName) {
+      case "distortion":
+        this.distortion.distortion = value;
+        break;
+      case "lowGain":
+        this.eq.low.value = value;
+        break;
+      case "midGain":
+        this.eq.mid.value = value;
+        break;
+      case "highGain":
+        this.eq.high.value = value;
+        break;
+      case "outputGain":
+        this.gain.gain.value = value;
+        break;
+      default:
+        console.error("Invalid parameter name:", parameterName);
+        break;
+    }
+  }
+
   connect(destination) {
     this.output.connect(destination || destination.input);
   }

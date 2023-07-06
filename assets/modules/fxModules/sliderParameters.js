@@ -1,9 +1,11 @@
 class SliderParameters {
-  constructor(name, min, max, defaultValue) {
+  constructor(name, minValue, maxValue, step, defaultValue) {
     this.name = name;
-    this.min = min;
-    this.max = max;
-    this.defaultValue = defaultValue;
+    this.minValue = minValue;
+    this.maxValue = maxValue;
+    this.step = step;
+    this.value = defaultValue; // Store the current value
+    this.sliderElement = null; // Reference to the slider element
   }
 
   createSlider() {
@@ -12,17 +14,46 @@ class SliderParameters {
 
     const labelElement = document.createElement("label");
     labelElement.textContent = this.name;
-
-    const sliderElement = document.createElement("input");
-    sliderElement.type = "range";
-    sliderElement.min = this.minValue;
-    sliderElement.max = this.maxValue;
-    sliderElement.value = this.defaultValue;
-
     sliderContainer.appendChild(labelElement);
-    sliderContainer.appendChild(sliderElement);
 
-    return SliderContainer;
+    const sliderWrapper = document.createElement("div");
+    sliderWrapper.classList.add("slider-wrapper");
+
+    this.sliderElement = document.createElement("input");
+    this.sliderElement.type = "range";
+    this.sliderElement.min = this.minValue;
+    this.sliderElement.max = this.maxValue;
+    this.sliderElement.step = this.step;
+    this.sliderElement.value = this.value; // Set the value to the current value
+
+    sliderWrapper.appendChild(this.sliderElement);
+    sliderContainer.appendChild(sliderWrapper);
+
+    // Update the stored value when the slider value changes
+    this.sliderElement.addEventListener("input", (event) => {
+      this.value = parseFloat(event.target.value);
+      this.updateAudioModule();
+    });
+
+    return sliderContainer;
+  }
+
+  setValue(newValue) {
+    // Update the stored value
+    this.value = newValue;
+
+    // Update the slider value if the slider has been created
+    if (this.sliderElement) {
+      this.sliderElement.value = newValue;
+    }
+
+    this.updateAudioModule();
+  }
+
+  updateAudioModule() {
+    // Implement the logic to update the audio module with the new value
+    // For example:
+    // audioModule.setParameter(this.name, this.value);
   }
 }
 
