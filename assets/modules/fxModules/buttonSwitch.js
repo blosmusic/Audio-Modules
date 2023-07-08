@@ -31,6 +31,14 @@ class ButtonSwitch {
     // Implement the logic to update the audio module based on the state
     // For example:
     // audioModule.setFXState(this.on);
+
+    // console.log("Button clicked:", this.on);
+
+    // if (this.on) {
+    //   distortionFX.distortion.wet.value = 0;
+    // } else {
+    //   distortionFX.distortion.wet.value = 1;
+    // }
   }
 }
 

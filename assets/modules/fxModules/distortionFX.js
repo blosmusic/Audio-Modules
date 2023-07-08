@@ -11,20 +11,21 @@ class DistortionFXModule {
     lowGain,
     midGain,
     highGain,
-    outputGain
+    outputGain,
+    wetDryBypass
   ) {
     // Create components
     this.input = new Tone.Gain(inputGain); //typically 0
     this.distortion = new Tone.Distortion({
       distortion: distortionAmount,
       oversample: "2x",
-      wet: 1, // will be used to bypass
+      wet: wetDryBypass, // will be used to bypass
     });
     this.eq = new Tone.EQ3(lowGain, midGain, highGain);
     this.output = new Tone.Gain(outputGain);
-    // this.output = new Tone.Gain();
 
     // Connect the components
+    // order based on https://www.electrosmash.com/tube-screamer-analysis
     this.input.connect(this.distortion);
     this.distortion.connect(this.eq);
     this.eq.connect(this.output);
@@ -35,13 +36,21 @@ class DistortionFXModule {
     if (moduleElement) {
       moduleElement.style.backgroundColor = colour;
 
-      // Create an <h3> element with the provided title
+      // Create an <h2> element with the provided title
       const titleElement = document.createElement("h2");
       titleElement.textContent = title;
 
       // Append the title element to the module element
       moduleElement.appendChild(titleElement);
     }
+  }
+
+  get wetDryBypass() {
+    return this.distortion.wet.value;
+  }
+
+  set wetDryBypass(value) {
+    this.distortion.wet.value = value;
   }
 
   setParameter(parameterName, value) {
