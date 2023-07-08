@@ -63,14 +63,6 @@ const distortionFX = new DistortionFXModule(
     distortionFX.setParameter("outputGain", dirtGain.value);
   });
 
-  // dirtSwitch.button.addEventListener("click", () => {
-  //   console.log("Button clicked:", dirtSwitch.on, distortionFX.distortion.wetDryBypass.value);
-  //   if (dirtSwitch.on) {
-  //     distortionFX.distortion.wet.value = 0;
-  //   } else {
-  //     distortionFX.distortion.wet.value = 1;
-  //   }
-  // });
 dirtSwitch.button.addEventListener("click", () => {
   console.log("Button clicked:", dirtSwitch.on, distortionFX.wetDryBypass);
   distortionFX.wetDryBypass = dirtSwitch.on ? 0 : 1;
