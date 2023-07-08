@@ -40,7 +40,8 @@ const distortionFX = new DistortionFXModule(
   0.3,
   dirtTreble.value,
   dirtGain.value,
-  1// dirtSwitch.on
+  0,
+  1
 );
 
   document.getElementById("distortion-module").appendChild(dirtValueSlider);
@@ -63,9 +64,25 @@ const distortionFX = new DistortionFXModule(
     distortionFX.setParameter("outputGain", dirtGain.value);
   });
 
+let bypassValue = distortionFX.wetDryBypass; // Store the bypass value
+let signalValue = distortionFX.wetDrySignal; // Store the signal value
+console.log("Button clicked:", dirtSwitch.on, "bypass", distortionFX.wetDryBypass, bypassValue, signalValue);
+
 dirtSwitch.button.addEventListener("click", () => {
-  console.log("Button clicked:", dirtSwitch.on, distortionFX.wetDryBypass);
-  distortionFX.wetDryBypass = dirtSwitch.on ? 0 : 1;
+  // Update the wetDryBypass value based on the dirtSwitch state
+  if (!dirtSwitch.on) {
+    distortionFX.wetDryBypass = bypassValue;
+  } else {
+    distortionFX.wetDryBypass = signalValue;
+  }
+  console.log(
+    "Button clicked:",
+    dirtSwitch.on,
+    "bypass",
+    distortionFX.wetDryBypass,
+    bypassValue,
+    signalValue
+  );
 });
 
 

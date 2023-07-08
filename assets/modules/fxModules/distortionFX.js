@@ -12,7 +12,8 @@ class DistortionFXModule {
     midGain,
     highGain,
     outputGain,
-    wetDryBypass
+    wetDryBypass,
+    wetDrySignal
   ) {
     // Create components
     this.input = new Tone.Gain(inputGain); //typically 0
@@ -23,6 +24,8 @@ class DistortionFXModule {
     });
     this.eq = new Tone.EQ3(lowGain, midGain, highGain);
     this.output = new Tone.Gain(outputGain);
+    this.bypass = wetDryBypass; // will be used to bypass
+    this.wetDrySignal = wetDrySignal; // will be used to bypass
 
     // Connect the components
     // order based on https://www.electrosmash.com/tube-screamer-analysis
