@@ -56,6 +56,30 @@ class SliderParameters {
     // For example:
     // audioModule.setParameter(this.name, this.value);
   }
+
+  // reset to default value on double click of slider thumb or label
+  resetToDefault() {
+    if (this.sliderElement) {
+      this.sliderElement.addEventListener("dblclick", () => {
+        this.setToDefault();
+      });
+    }
+    this.setValue(this.defaultValue);
+
+    if (this.labelElement) {
+      this.labelElement.addEventListener("dblclick", () => {
+        this.setToDefault();
+      });
+    }
+    this.setValue(this.defaultValue);
+
+    this.updateAudioModule();
+  }
+
+  // set the value to the default value
+  setToDefault() {
+    this.value = this.defaultValue;
+  }
 }
 
 export default SliderParameters;
