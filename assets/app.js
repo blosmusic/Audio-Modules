@@ -69,6 +69,8 @@ dirtGain.sliderElement.addEventListener("input", () => {
   distortionFX.setParameter("outputGain", dirtGain.value);
 });
 
+// button constructor: (callback, module) 
+// const is calling the constructor from the buttonSwitch.js file
 const dirtSwitch = new ButtonSwitch((state) => {
   if (!state) {
     distortionFX.wetDryBypass = bypassValue;
@@ -77,7 +79,6 @@ const dirtSwitch = new ButtonSwitch((state) => {
   }
   // console.log("Button clicked:", dirtSwitch.on, "bypass", distortionFX.wetDryBypass, bypassValue, signalValue);
 }, distortionModule);
-
 
 // Main function
 async function main() {
