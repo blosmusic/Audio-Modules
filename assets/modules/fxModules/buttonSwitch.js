@@ -2,15 +2,23 @@ class ButtonSwitch {
   constructor() {
     this.button = null;
     this.on = false; // Set the initial state to off
+    this.indicator = null;
     this.updateButtonAppearance();
   }
 
   createButton() {
+    // Create a button element
     this.button = document.createElement("button");
     this.button.textContent = this.on ? "On" : "Off";
     this.button.addEventListener("click", () => {
       this.toggle();
     });
+
+    // Create an indicator element for button
+    this.indicator = document.createElement("div");
+    this.indicator.classList.add("indicator");
+    this.indicator.style.backgroundColor = "darkred";
+    this.button.appendChild(this.indicator);
 
     return this.button;
   }

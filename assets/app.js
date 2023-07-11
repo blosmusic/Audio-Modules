@@ -37,7 +37,7 @@ const dirtGainSlider = dirtGain.createSlider();
 const dirtSwitch = new ButtonSwitch("distortion");
 const dirtSwitchButton = dirtSwitch.createButton();
 
-// distortion constructor: (id, title, colour, inputGain, distortionAmount, lowGain, midGain, highGain, outputGain, wetDryBypass)
+// distortion constructor: (id, title, colour, inputGain, distortionAmount, lowGain, midGain, highGain, outputGain, wetDryBypass, wetDrySignal)
 const distortionFX = new DistortionFXModule(
   "distortion-module",
   "distortion",
@@ -80,10 +80,10 @@ dirtSwitch.button.addEventListener("click", () => {
   // Update the wetDryBypass value based on the dirtSwitch state
   if (!dirtSwitch.on) {
     distortionFX.wetDryBypass = bypassValue;
-    // indicator.style.backgroundColor = "darkred";
+    indicator.style.backgroundColor = "darkred";
   } else {
     distortionFX.wetDryBypass = signalValue;
-    // indicator.style.backgroundColor = "brightred";
+    indicator.style.backgroundColor = "brightred";
   }
   // console.log(
   //   "Button clicked:",
