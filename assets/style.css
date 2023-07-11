@@ -179,7 +179,7 @@ input[type="range"] {
   align-items: center;
   text-transform: uppercase;
   cursor: pointer;
-  transition: all 0.2s ease-in-out;
+  transition: all 0.1s ease-in-out;
 }
 
 .indicator {
