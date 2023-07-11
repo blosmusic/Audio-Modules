@@ -182,9 +182,10 @@ input[type="range"] {
   transition: all 0.2s ease-in-out;
 }
 
-.fx-module .indicator {
+.indicator {
   width: 20px;
   height: 20px;
+  background-color: #00ff91;
   border-radius: 100%;
   margin: -110px 0 0 15px;
   padding: 0 0 0 0;
