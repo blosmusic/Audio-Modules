@@ -5,7 +5,7 @@ class ButtonSwitch {
     this.indicator = null;
     this.updateCallback = updateCallback; // Custom update callback function
     this.fxContainer = fxContainer; // Reference to the FX module's container element
-    this.createButton();
+    this.createButton(); // Create the button element
   }
 
   createButton() {
