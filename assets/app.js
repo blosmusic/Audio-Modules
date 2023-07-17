@@ -27,13 +27,19 @@ const dirtValue = new SliderParameters(
   1,
   0.01,
   0.5,
-  "distortion"
+  "distortion",
+  distortionModule
 );
-const dirtTreble = new SliderParameters("highGain", 0, 10, 0.01, 0, "treble");
-const dirtGain = new SliderParameters("outputGain", 0, 1, 0.01, 0.5, "gain");
-const dirtValueSlider = dirtValue.createSlider();
-const dirtTrebleSlider = dirtTreble.createSlider();
-const dirtGainSlider = dirtGain.createSlider();
+const dirtTreble = new SliderParameters(
+  "highGain",
+  0,
+  10,
+  0.01,
+  0,
+  "treble",
+  distortionModule
+);
+const dirtGain = new SliderParameters("outputGain", 0, 1, 0.01, 0.5, "gain", distortionModule);
 
 // distortion constructor: (id, title, colour, inputGain, distortionAmount, lowGain, midGain, highGain, outputGain, wetDryBypass, wetDrySignal)
 const distortionFX = new DistortionFXModule(
@@ -52,10 +58,6 @@ const distortionFX = new DistortionFXModule(
 
 let bypassValue = distortionFX.wetDryBypass; // Store the bypass value
 let signalValue = distortionFX.wetDrySignal; // Store the signal value
-
-distortionModule.appendChild(dirtValueSlider);
-distortionModule.appendChild(dirtTrebleSlider);
-distortionModule.appendChild(dirtGainSlider);
 
 dirtValue.sliderElement.addEventListener("input", () => {
   distortionFX.setParameter("distortion", dirtValue.value);

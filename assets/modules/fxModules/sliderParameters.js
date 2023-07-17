@@ -1,5 +1,14 @@
 class SliderParameters {
-  constructor(name, minValue, maxValue, step, defaultValue, labelName) {
+  constructor(
+    name,
+    minValue,
+    maxValue,
+    step,
+    defaultValue,
+    labelName,
+    moduleContainer
+  ) {
+    this.slider = null; // Reference to the slider element
     this.name = name;
     this.minValue = minValue;
     this.maxValue = maxValue;
@@ -8,9 +17,15 @@ class SliderParameters {
     this.value = defaultValue; // Store the current value
     this.sliderElement = null; // Reference to the slider element
     this.labelName = labelName; // Reference to the label element
+
+    // call the createSlider method to create the slider element
+    this.createSlider(moduleContainer); // Create the slider element
+
+    // Set the reset to the default value
+    this.resetToDefault();
   }
 
-  createSlider() {
+  createSlider(moduleContainer) {
     const sliderContainer = document.createElement("div");
     sliderContainer.classList.add("slider-container");
 
@@ -33,6 +48,7 @@ class SliderParameters {
 
     // Update the stored value when the slider value changes
     this.sliderElement.addEventListener("input", (event) => {
+      console.log(this.name, event.target.value); // for debugging
       this.value = parseFloat(event.target.value);
       this.updateAudioModule();
     });
@@ -40,10 +56,8 @@ class SliderParameters {
     // Set the labelElement
     this.labelElement = labelElement;
 
-    // Set the reset to default value
-    this.resetToDefault();
-
-    return sliderContainer;
+    // Append the slider to the module container
+    moduleContainer.appendChild(sliderContainer);
   }
 
   setValue(newValue) {
