@@ -59,6 +59,7 @@ distortionModule.appendChild(dirtGainSlider);
 
 dirtValue.sliderElement.addEventListener("input", () => {
   distortionFX.setParameter("distortion", dirtValue.value);
+  // console.log(dirtValue.value); // for testing
 });
 
 dirtTreble.sliderElement.addEventListener("input", () => {
@@ -89,7 +90,7 @@ async function main() {
     await audioSource.open();
     console.log("Audio source opened");
 
-    // Connect the audio source to the meter
+    // Connect the audio source to the audio chain
     audioSource.connect(monoSignal);
     monoSignal.connect(inputMeter.input);
     inputMeter.output.connect(distortionFX.input);

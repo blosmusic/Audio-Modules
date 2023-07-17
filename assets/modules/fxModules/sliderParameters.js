@@ -4,6 +4,7 @@ class SliderParameters {
     this.minValue = minValue;
     this.maxValue = maxValue;
     this.step = step;
+    this.defaultValue = defaultValue; // Store the default value
     this.value = defaultValue; // Store the current value
     this.sliderElement = null; // Reference to the slider element
     this.labelName = labelName; // Reference to the label element
@@ -36,6 +37,12 @@ class SliderParameters {
       this.updateAudioModule();
     });
 
+    // Set the labelElement
+    this.labelElement = labelElement;
+
+    // Set the reset to default value
+    this.resetToDefault();
+
     return sliderContainer;
   }
 
@@ -59,26 +66,31 @@ class SliderParameters {
 
   // reset to default value on double click of slider thumb or label
   resetToDefault() {
+    const handleDblClick = () => {
+      this.setToDefault();
+      this.setValue(this.defaultValue);
+      this.updateAudioModule();
+      // console.log(this.name, "reset to default", this.defaultValue);
+    };
+
     if (this.sliderElement) {
-      this.sliderElement.addEventListener("dblclick", () => {
-        this.setToDefault();
-      });
+      this.sliderElement.addEventListener("dblclick", handleDblClick);
     }
-    this.setValue(this.defaultValue);
 
     if (this.labelElement) {
-      this.labelElement.addEventListener("dblclick", () => {
-        this.setToDefault();
-      });
+      this.labelElement.addEventListener("dblclick", handleDblClick);
     }
-    this.setValue(this.defaultValue);
-
-    this.updateAudioModule();
   }
 
   // set the value to the default value
   setToDefault() {
     this.value = this.defaultValue;
+
+    if (this.sliderElement) {
+      this.sliderElement.value = this.defaultValue;
+      this.sliderElement.dispatchEvent(new Event("input"));
+    }
+    this.updateAudioModule();
   }
 }
 
