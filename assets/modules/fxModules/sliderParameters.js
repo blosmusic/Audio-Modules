@@ -70,7 +70,7 @@ class SliderParameters {
       this.setToDefault();
       this.setValue(this.defaultValue);
       this.updateAudioModule();
-      // console.log(this.name, "reset to default", this.defaultValue);
+      // console.log(this.name, "reset to default", this.defaultValue); // for debugging
     };
 
     if (this.sliderElement) {
@@ -90,7 +90,6 @@ class SliderParameters {
       this.sliderElement.value = this.defaultValue;
       this.sliderElement.dispatchEvent(new Event("input"));
     }
-    this.updateAudioModule();
   }
 }
 

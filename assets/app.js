@@ -97,9 +97,6 @@ async function main() {
     distortionFX.output.connect(outputMeter.input);
     outputMeter.output.connect(destination);
 
-    // Start the meter update loops
-    inputMeter.start();
-    outputMeter.start();
   } catch (error) {
     console.error("Failed to open audio source:", error);
   }

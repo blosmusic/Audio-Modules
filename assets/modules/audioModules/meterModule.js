@@ -12,6 +12,9 @@ class Meter {
     // Connect the moduule nodes
     this.input = this.meter;
     this.meter.connect(this.output);
+
+    // Start the animation loop
+    this.start();
   }
 
   updateMeter() {
