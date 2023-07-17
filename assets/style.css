@@ -163,6 +163,7 @@ input[type="range"] {
   margin-right: 3px;
   text-align: center;
   text-transform: uppercase;
+  user-select: none;
 }
 
 .fx-module button {
