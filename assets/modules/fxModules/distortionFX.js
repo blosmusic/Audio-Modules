@@ -41,6 +41,7 @@ class DistortionFXModule {
       // Create an <h2> element with the provided title
       const titleElement = document.createElement("h2");
       titleElement.textContent = title;
+      titleElement.style.order = "1";
 
       // Append the title element to the module element
       moduleElement.appendChild(titleElement);

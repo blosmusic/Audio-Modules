@@ -30,6 +30,7 @@ h2 {
     margin: 20px 0;
     padding: 10px;
     text-transform: uppercase;
+    vertical-align: top;
 }
 
 h3 {
