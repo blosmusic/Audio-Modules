@@ -79,8 +79,7 @@ class SliderParameters {
   // Update the audio module
   updateAudioModule() {
     // Implement the logic to update the audio module with the new value
-    // For example:
-    // audioModule.setParameter(this.name, this.value);
+    // console.log("updateAudioModule", this.name, this.value); // for debugging
   }
 
   // reset to default value on double click of slider thumb or label
