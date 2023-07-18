@@ -90,27 +90,102 @@ const dirtSwitch = new ButtonSwitch((state) => {
   // console.log("Button state:", dirtSwitch.on); // for debugging
 }, distortionModule);
 
+const distortionModule2 = document.getElementById("distortion-module-2");
+
+const dirtValue2 = new SliderParameters(
+  "distortion",
+  0,
+  1,
+  0.01,
+  0.5,
+  "distortion",
+  distortionModule2
+);
+
+const dirtTreble2 = new SliderParameters(
+  "highGain",
+  0,
+  10,
+  0.01,
+  0,
+  "treble",
+  distortionModule2
+);
+
+const dirtGain2 = new SliderParameters(
+  "outputGain",
+  0.01,
+  1,
+  0.01,
+  0.5,
+  "gain",
+  distortionModule2
+);
+
+const distortionFX2 = new DistortionFXModule(
+  "distortion-module-2",
+  "distortion II",
+  "purple",
+  1,
+  dirtValue2.value,
+  0.1,
+  0.3,
+  dirtTreble2.value,
+  dirtGain2.value,
+  1,
+);
+
+dirtValue2.sliderElement.addEventListener("input", () => {
+  // console.log("dirtValue", dirtValue.value); // for debugging
+  distortionFX2.setParameter("distortion", dirtValue2.value);
+});
+
+dirtTreble2.sliderElement.addEventListener("input", () => {
+  // console.log("dirtTreble", dirtTreble.value); // for debugging
+  distortionFX2.setParameter("highGain", dirtTreble2.value);
+});
+
+dirtGain2.sliderElement.addEventListener("input", () => {
+  // console.log("dirtGain", dirtGain.value); // for debugging
+  distortionFX2.setParameter("outputGain", dirtGain2.value);
+});
+
+const dirtSwitch2 = new ButtonSwitch((state) => {
+  if (!state) {
+    distortionFX2.disconnect();
+    // inputMeter.output.connect(outputMeter.input);
+  } else {
+    distortionFX2.output.connect(outputMeter.input);
+  }
+  // console.log("Button state:", dirtSwitch.on); // for debugging
+}, distortionModule2);
+
 // Create an array to host the FX modules
 const fxModules = [];
 // Push the modules into the array
 fxModules.push(distortionFX); // distortion module
+fxModules.push(distortionFX2); // distortion module 2
 
 // Create an array to host the FX module buttons
 const fxButtons = [];
 // Push the buttons into the array
-fxButtons.push(dirtSwitch);
+fxButtons.push(dirtSwitch); // distortion button
+fxButtons.push(dirtSwitch2); // distortion button 2
 
 // Function to toggle the FX modules on and off
 function toggleFX() {
-  for (let i = 0; i < fxButtons.length; i++) {
+  for (let i = 0; i < fxModules.length; i++) {
+    // console.log("fxButtons", fxButtons); // for debugging
+    inputMeter.output.connect(fxModules[i].input);
     if (fxButtons[i].on) {
+      console.log("fxModules", fxModules[i], "on"); // for debugging
       fxModules[i].output.connect(fxModules[i + 1].input);
       // last module in the array is connected to the output meter
       fxModules[fxModules.length - 1].output.connect(outputMeter.input);
-    } else {
+    } else if (!fxButtons[i].on){
+      console.log("fxModules", fxModules[i], "off"); // for debugging
       fxModules[i].disconnect();
-      // fxModules[i].output.disconnect(fxModules[i + 1].input);
-      inputMeter.output.connect(outputMeter.input);
+      // inputMeter.output.connect(outputMeter.input);
     }
   }
 }
@@ -130,15 +205,12 @@ async function main() {
     audioSource.connect(monoSignal);
     monoSignal.connect(inputMeter.input);
     // debugging
-    // inputMeter.output.connect(distortionFX.input);
-    // distortionFX.output.connect(outputMeter.input);
+    // inputMeter.output.connect(distortionFX2.input);
+    // distortionFX2.output.connect(outputMeter.input);
     // connect the meter to the FX module array
     if (fxModules.length > 0) {
-      // console.log("fxModules.length", fxModules.length, "fxModules", fxModules);
-      inputMeter.output.connect(fxModules[0].input);
       toggleFX();
     } else {
-      // console.log("fxModules.length", fxModules.length, "fxModules", fxModules);
       inputMeter.output.connect(outputMeter.input);
     }
     // output meter is connected to the destination
