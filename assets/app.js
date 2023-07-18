@@ -49,7 +49,7 @@ const dirtGain = new SliderParameters(
   distortionModule
 );
 
-// distortion constructor: (id, title, colour, inputGain, distortionAmount, lowGain, midGain, highGain, outputGain, wetDryBypass, wetDrySignal)
+// distortion constructor: (id, title, colour, inputGain, distortionAmount, lowGain, midGain, highGain, outputGain, wetDryMix)
 const distortionFX = new DistortionFXModule(
   "distortion-module",
   "distortion",
@@ -60,12 +60,8 @@ const distortionFX = new DistortionFXModule(
   0.3,
   dirtTreble.value,
   dirtGain.value,
-  0,
-  1
+  1,
 );
-
-let bypassValue = distortionFX.wetDryBypass; // Store the bypass value
-let signalValue = distortionFX.wetDrySignal; // Store the signal value
 
 dirtValue.sliderElement.addEventListener("input", () => {
   // console.log("dirtValue", dirtValue.value);
@@ -86,12 +82,18 @@ dirtGain.sliderElement.addEventListener("input", () => {
 // const is calling the constructor from the buttonSwitch.js file
 const dirtSwitch = new ButtonSwitch((state) => {
   if (!state) {
-    distortionFX.wetDryBypass = bypassValue;
+    distortionFX.disconnect();
+    // inputMeter.output.connect(outputMeter.input);
   } else {
-    distortionFX.wetDryBypass = signalValue;
+    distortionFX.output.connect(outputMeter.input);
   }
-  // console.log("Button clicked:", dirtSwitch.on, "bypass", distortionFX.wetDryBypass, bypassValue, signalValue);
+  // console.log("Button state:", dirtSwitch.on);
 }, distortionModule);
+
+// Create an array to host the FX modules
+const fxModules = [];
+// Push the modules into the array
+fxModules.push(distortionFX);
 
 // Main function
 async function main() {
@@ -102,11 +104,18 @@ async function main() {
     await audioSource.open();
     console.log("Audio source opened");
 
-    // Connect the audio source to the meter
+    // connect the audio source to the meter
     audioSource.connect(monoSignal);
     monoSignal.connect(inputMeter.input);
-    inputMeter.output.connect(distortionFX.input);
-    distortionFX.output.connect(outputMeter.input);
+    inputMeter.output.connect(fxModules[0].input);
+    // FX array of modules
+    for (let i = 0; i < fxModules.length - 1; i++) {
+      console.log("fx", fx);
+      fxModules[i].output.connect(fxModules[i + 1].input);
+    }
+    // last module in the array is connected to the output meter
+    fxModules[fxModules.length - 1].output.connect(outputMeter.input);
+    // output meter is connected to the destination
     outputMeter.output.connect(destination);
   } catch (error) {
     console.error("Failed to open audio source:", error);

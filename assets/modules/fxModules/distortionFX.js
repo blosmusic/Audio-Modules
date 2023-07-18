@@ -12,20 +12,17 @@ class DistortionFXModule {
     midGain,
     highGain,
     outputGain,
-    wetDryBypass,
-    wetDrySignal
+    wetDryMix,
   ) {
     // Create components
     this.input = new Tone.Gain(inputGain); // typically 1
     this.distortion = new Tone.Distortion({
       distortion: distortionAmount,
       oversample: "2x",
-      wet: wetDryBypass, // will be used to bypass the distortion
+      wet: wetDryMix, // a value between 0 and 1
     });
     this.eq = new Tone.EQ3(lowGain, midGain, highGain);
     this.output = new Tone.Gain(outputGain);
-    this.bypass = wetDryBypass; // typically 0
-    this.wetDrySignal = wetDrySignal; // will be used to control the wet signal (distortion)
 
     // Connect the components
     // order based on https://www.electrosmash.com/tube-screamer-analysis
@@ -48,11 +45,11 @@ class DistortionFXModule {
     }
   }
 
-  get wetDryBypass() {
+  get wetDryMix() {
     return this.distortion.wet.value;
   }
 
-  set wetDryBypass(value) {
+  set wetDryMix(value) {
     this.distortion.wet.value = value;
   }
 
@@ -76,8 +73,8 @@ class DistortionFXModule {
       case "outputGain":
         this.output.gain.value = value;
         break;
-      case "bypass":
-        this.bypass = value;
+      case "wetDryMix":
+        this.distortion.wet = value;
         break;
       default:
         console.error("Invalid parameter name:", parameterName);
