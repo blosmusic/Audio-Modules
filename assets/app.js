@@ -20,14 +20,15 @@ const outputMeter = new Meter(-100, 0, "output-meter", "output-db-value");
 
 // FX Module Setup
 const distortionModule = document.getElementById("distortion-module");
-// slider constructor: (id, min, max, step, value, label)
+// slider constructor: (id, min, max, step, value, label, moduleContainer)
 const dirtValue = new SliderParameters(
   "distortion",
   0,
   1,
   0.01,
   0.5,
-  "distortion"
+  "distortion",
+  distortionModule
 );
 const dirtTreble = new SliderParameters(
   "highGain",
@@ -38,7 +39,15 @@ const dirtTreble = new SliderParameters(
   "treble",
   distortionModule
 );
-const dirtGain = new SliderParameters("outputGain", 0, 1, 0.01, 0.5, "gain", distortionModule);
+const dirtGain = new SliderParameters(
+  "outputGain",
+  0,
+  1,
+  0.01,
+  0.5,
+  "gain",
+  distortionModule
+);
 
 // distortion constructor: (id, title, colour, inputGain, distortionAmount, lowGain, midGain, highGain, outputGain, wetDryBypass, wetDrySignal)
 const distortionFX = new DistortionFXModule(
@@ -59,18 +68,21 @@ let bypassValue = distortionFX.wetDryBypass; // Store the bypass value
 let signalValue = distortionFX.wetDrySignal; // Store the signal value
 
 dirtValue.sliderElement.addEventListener("input", () => {
+  console.log("dirtValue", dirtValue.value);
   distortionFX.setParameter("distortion", dirtValue.value);
 });
 
 dirtTreble.sliderElement.addEventListener("input", () => {
+  console.log("dirtTreble", dirtTreble.value);
   distortionFX.setParameter("highGain", dirtTreble.value);
 });
 
 dirtGain.sliderElement.addEventListener("input", () => {
+  console.log("dirtGain", dirtGain.value);
   distortionFX.setParameter("outputGain", dirtGain.value);
 });
 
-// button constructor: (callback, module) 
+// button constructor: (callback, module)
 // const is calling the constructor from the buttonSwitch.js file
 const dirtSwitch = new ButtonSwitch((state) => {
   if (!state) {

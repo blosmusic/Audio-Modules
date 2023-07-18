@@ -8,7 +8,6 @@ class SliderParameters {
     labelName,
     moduleContainer
   ) {
-    this.slider = null; // Reference to the slider element
     this.name = name;
     this.minValue = minValue;
     this.maxValue = maxValue;
@@ -17,9 +16,15 @@ class SliderParameters {
     this.value = defaultValue; // Store the current value
     this.sliderElement = null; // Reference to the slider element
     this.labelName = labelName; // Reference to the label element
+
+    // Call the createSlider function to design the slider and append it to the module container
+    this.createSlider(moduleContainer); // moduleContainer is the parent element
+
+    // Set the reset to default value
+    this.resetToDefault();
   }
 
-  createSlider() {
+  createSlider(moduleContainer) {
     const sliderContainer = document.createElement("div");
     sliderContainer.classList.add("slider-container");
 
@@ -53,7 +58,8 @@ class SliderParameters {
     // Set the reset to default value
     this.resetToDefault();
 
-    return sliderContainer;
+    // Append the slider to the module container
+    moduleContainer.appendChild(sliderContainer);
   }
 
   setValue(newValue) {
@@ -65,6 +71,16 @@ class SliderParameters {
     if (this.sliderElement) {
       this.sliderElement.value = newValue;
     }
+
+    // Update the audio module
+    this.updateAudioModule();
+  }
+
+  // Update the audio module
+  updateAudioModule() {
+    // Implement the logic to update the audio module with the new value
+    // For example:
+    // audioModule.setParameter(this.name, this.value);
   }
 
   // reset to default value on double click of slider thumb or label
