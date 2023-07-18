@@ -175,22 +175,20 @@ fxButtons.push(dirtSwitch2); // distortion button 2
 // Function to toggle the FX modules on and off
 function toggleFX() {
   for (let i = 0; i < fxModules.length; i++) {
-    // console.log("fxButtons", fxButtons); // for debugging
+    // console.log("fxButtons", fxButtons[i]); // for debugging
     inputMeter.output.connect(fxModules[i].input);
-    if (fxButtons[i].on) {
-      console.log("fxModules", fxModules[i], "on"); // for debugging
-      fxModules[i].output.connect(fxModules[i + 1].input);
-      // last module in the array is connected to the output meter
-      fxModules[fxModules.length - 1].output.connect(outputMeter.input);
-    } else if (!fxButtons[i].on){
-      console.log("fxModules", fxModules[i], "off"); // for debugging
-      fxModules[i].disconnect();
-      // inputMeter.output.connect(outputMeter.input);
-    }
+    // if (fxButtons[i].on) {
+    //   // console.log("fxModules", fxModules[i], "on"); // for debugging
+    //   fxModules[i].output.connect(fxModules[i + 1].input);
+    //   // last module in the array is connected to the output meter
+    //   fxModules[fxModules.length - 1].output.connect(outputMeter.input);
+    // } else if (!fxButtons[i].on){
+    //   // console.log("fxModules", fxModules[i], "off"); // for debugging
+    //   fxModules[i].disconnect();
+    //   // inputMeter.output.connect(outputMeter.input);
+    // }
   }
 }
-
-// move dirt to a module and create a second dist module
 
 // Main function
 async function main() {
