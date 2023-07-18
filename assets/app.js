@@ -64,17 +64,17 @@ const distortionFX = new DistortionFXModule(
 );
 
 dirtValue.sliderElement.addEventListener("input", () => {
-  // console.log("dirtValue", dirtValue.value);
+  // console.log("dirtValue", dirtValue.value); // for debugging
   distortionFX.setParameter("distortion", dirtValue.value);
 });
 
 dirtTreble.sliderElement.addEventListener("input", () => {
-  // console.log("dirtTreble", dirtTreble.value);
+  // console.log("dirtTreble", dirtTreble.value); // for debugging
   distortionFX.setParameter("highGain", dirtTreble.value);
 });
 
 dirtGain.sliderElement.addEventListener("input", () => {
-  // console.log("dirtGain", dirtGain.value);
+  // console.log("dirtGain", dirtGain.value); // for debugging
   distortionFX.setParameter("outputGain", dirtGain.value);
 });
 
@@ -87,13 +87,35 @@ const dirtSwitch = new ButtonSwitch((state) => {
   } else {
     distortionFX.output.connect(outputMeter.input);
   }
-  // console.log("Button state:", dirtSwitch.on);
+  // console.log("Button state:", dirtSwitch.on); // for debugging
 }, distortionModule);
 
 // Create an array to host the FX modules
 const fxModules = [];
 // Push the modules into the array
 fxModules.push(distortionFX);
+
+// Create an array to host the FX module buttons
+const fxButtons = [];
+// Push the buttons into the array
+fxButtons.push(dirtSwitch);
+
+// Function to toggle the FX modules on and off
+function toggleFX() {
+  for (let i = 0; i < fxButtons.length; i++) {
+    if (fxButtons[i].on) {
+      fxModules[i].output.connect(fxModules[i + 1].input);
+      // last module in the array is connected to the output meter
+      fxModules[fxModules.length - 1].output.connect(outputMeter.input);
+    } else {
+      fxModules[i].disconnect();
+
+      // inputMeter.output.connect(outputMeter.input);
+
+      // fxModules[i].output.disconnect(fxModules[i + 1].input);
+    }
+  }
+}
 
 // Main function
 async function main() {
@@ -107,14 +129,13 @@ async function main() {
     // connect the audio source to the meter
     audioSource.connect(monoSignal);
     monoSignal.connect(inputMeter.input);
-    inputMeter.output.connect(fxModules[0].input);
-    // FX array of modules
-    for (let i = 0; i < fxModules.length - 1; i++) {
-      console.log("fx", fx);
-      fxModules[i].output.connect(fxModules[i + 1].input);
+    // connect the meter to the FX module array
+    if (fxModules.length > 0) {
+      inputMeter.output.connect(fxModules[0].input);
+      toggleFX();
+    } else {
+      inputMeter.output.connect(outputMeter.input);
     }
-    // last module in the array is connected to the output meter
-    fxModules[fxModules.length - 1].output.connect(outputMeter.input);
     // output meter is connected to the destination
     outputMeter.output.connect(destination);
   } catch (error) {
