@@ -47,7 +47,7 @@ class SliderParameters {
 
     // Update the stored value when the slider value changes
     this.sliderElement.addEventListener("input", (event) => {
-      console.log(this.name, event.target.value); // for debugging
+      // console.log(this.name, event.target.value); // for debugging
       this.value = parseFloat(event.target.value);
       this.updateAudioModule();
     });

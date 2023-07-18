@@ -68,17 +68,17 @@ let bypassValue = distortionFX.wetDryBypass; // Store the bypass value
 let signalValue = distortionFX.wetDrySignal; // Store the signal value
 
 dirtValue.sliderElement.addEventListener("input", () => {
-  console.log("dirtValue", dirtValue.value);
+  // console.log("dirtValue", dirtValue.value);
   distortionFX.setParameter("distortion", dirtValue.value);
 });
 
 dirtTreble.sliderElement.addEventListener("input", () => {
-  console.log("dirtTreble", dirtTreble.value);
+  // console.log("dirtTreble", dirtTreble.value);
   distortionFX.setParameter("highGain", dirtTreble.value);
 });
 
 dirtGain.sliderElement.addEventListener("input", () => {
-  console.log("dirtGain", dirtGain.value);
+  // console.log("dirtGain", dirtGain.value);
   distortionFX.setParameter("outputGain", dirtGain.value);
 });
 
