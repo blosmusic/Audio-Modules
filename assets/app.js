@@ -41,7 +41,7 @@ const dirtTreble = new SliderParameters(
 );
 const dirtGain = new SliderParameters(
   "outputGain",
-  0,
+  0.01,
   1,
   0.01,
   0.5,
@@ -93,7 +93,7 @@ const dirtSwitch = new ButtonSwitch((state) => {
 // Create an array to host the FX modules
 const fxModules = [];
 // Push the modules into the array
-fxModules.push(distortionFX);
+fxModules.push(distortionFX); // distortion module
 
 // Create an array to host the FX module buttons
 const fxButtons = [];
@@ -109,13 +109,13 @@ function toggleFX() {
       fxModules[fxModules.length - 1].output.connect(outputMeter.input);
     } else {
       fxModules[i].disconnect();
-
-      // inputMeter.output.connect(outputMeter.input);
-
       // fxModules[i].output.disconnect(fxModules[i + 1].input);
+      inputMeter.output.connect(outputMeter.input);
     }
   }
 }
+
+// move dirt to a module and create a second dist module
 
 // Main function
 async function main() {
@@ -125,15 +125,20 @@ async function main() {
   try {
     await audioSource.open();
     console.log("Audio source opened");
-
+    // console.log(fxButtons.length, fxModules.length); // for debugging
     // connect the audio source to the meter
     audioSource.connect(monoSignal);
     monoSignal.connect(inputMeter.input);
+    // debugging
+    // inputMeter.output.connect(distortionFX.input);
+    // distortionFX.output.connect(outputMeter.input);
     // connect the meter to the FX module array
     if (fxModules.length > 0) {
+      // console.log("fxModules.length", fxModules.length, "fxModules", fxModules);
       inputMeter.output.connect(fxModules[0].input);
       toggleFX();
     } else {
+      // console.log("fxModules.length", fxModules.length, "fxModules", fxModules);
       inputMeter.output.connect(outputMeter.input);
     }
     // output meter is connected to the destination
