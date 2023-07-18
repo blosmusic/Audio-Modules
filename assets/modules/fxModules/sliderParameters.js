@@ -8,7 +8,6 @@ class SliderParameters {
     labelName,
     moduleContainer
   ) {
-    this.slider = null; // Reference to the slider element
     this.name = name;
     this.minValue = minValue;
     this.maxValue = maxValue;
@@ -46,13 +45,6 @@ class SliderParameters {
     sliderWrapper.appendChild(this.sliderElement);
     sliderContainer.appendChild(sliderWrapper);
 
-    // Update the stored value when the slider value changes
-    this.sliderElement.addEventListener("input", (event) => {
-      console.log(this.name, event.target.value); // for debugging
-      this.value = parseFloat(event.target.value);
-      this.updateAudioModule();
-    });
-
     // Set the labelElement
     this.labelElement = labelElement;
 
@@ -61,6 +53,7 @@ class SliderParameters {
   }
 
   setValue(newValue) {
+    // console.log("setValue", this.name, newValue); // for debugging
     // Update the stored value
     this.value = newValue;
 
@@ -68,14 +61,6 @@ class SliderParameters {
     if (this.sliderElement) {
       this.sliderElement.value = newValue;
     }
-
-    this.updateAudioModule();
-  }
-
-  updateAudioModule() {
-    // Implement the logic to update the audio module with the new value
-    // For example:
-    // audioModule.setParameter(this.name, this.value);
   }
 
   // reset to default value on double click of slider thumb or label
@@ -83,12 +68,11 @@ class SliderParameters {
     const handleDblClick = () => {
       this.setToDefault();
       this.setValue(this.defaultValue);
-      this.updateAudioModule();
       // console.log(this.name, "reset to default", this.defaultValue); // for debugging
     };
 
     if (this.sliderElement) {
-      this.sliderElement.addEventListener("dblclick", handleDblClick);
+      this.sliderElement.addEventListener("dblclick", handleDblClick); // reset to default value on double click of slider thumb
     }
 
     if (this.labelElement) {
@@ -102,7 +86,7 @@ class SliderParameters {
 
     if (this.sliderElement) {
       this.sliderElement.value = this.defaultValue;
-      this.sliderElement.dispatchEvent(new Event("input"));
+      this.sliderElement.dispatchEvent(new Event("input")); // trigger the input event
     }
   }
 }

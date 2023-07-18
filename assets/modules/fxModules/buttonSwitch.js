@@ -1,10 +1,10 @@
 class ButtonSwitch {
-  constructor(updateCallback, fxContainer) {
+  constructor(updateCallback, moduleContainer) {
     this.button = null;
     this.on = false; // Set the initial state to off
     this.indicator = null;
     this.updateCallback = updateCallback; // Custom update callback function
-    this.fxContainer = fxContainer; // Reference to the FX module's container element
+    this.moduleContainer = moduleContainer; // Reference to the FX module's container element
     this.createButton(); // Create the button element
   }
 
@@ -15,13 +15,13 @@ class ButtonSwitch {
 
     // Create an indicator element for the button
     this.indicator = document.createElement("div");
-    this.indicator.id = `${this.fxContainer.id}-indicator`; // Set the id to `fxContainerId-indicator`
+    this.indicator.id = `${this.moduleContainer.id}-indicator`; // Set the id to `moduleContainerId-indicator`
     this.indicator.classList.add("indicator");
     this.indicator.style.backgroundColor = this.on ? "red" : "darkred";
 
-    // Append the button and indicator to the fxContainer
-    this.fxContainer.appendChild(this.button);
-    this.fxContainer.appendChild(this.indicator);
+    // Append the button and indicator to the moduleContainer
+    this.moduleContainer.appendChild(this.button);
+    this.moduleContainer.appendChild(this.indicator);
 
     this.button.addEventListener("click", () => {
       this.toggle();
