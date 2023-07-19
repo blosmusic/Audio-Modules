@@ -15,6 +15,8 @@ class DistortionFXModule {
     wetDryMix,
   ) {
     // Create components
+    this.id = id;
+    this.title = title;
     this.input = new Tone.Gain(inputGain); // typically 1
     this.distortion = new Tone.Distortion({
       distortion: distortionAmount,

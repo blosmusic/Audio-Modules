@@ -1,5 +1,6 @@
 class Meter {
   constructor(minDecibels, maxDecibels, meterElementId, dbElementId) {
+    this.title = "meter";
     this.input = new Tone.Gain();
     this.minDecibels = minDecibels;
     this.maxDecibels = maxDecibels;
