@@ -46,9 +46,9 @@ const dirtTreble = new SliderParameters(
 const dirtGain = new SliderParameters(
   "outputGain",
   0.01,
-  1,
+  10,
   0.01,
-  0.5,
+  5,
   "gain",
   distortionModule
 );
@@ -99,7 +99,7 @@ const dirtValue2 = new SliderParameters(
   0,
   1,
   0.01,
-  0.5,
+  0.3,
   "distortion",
   distortionModule2
 );
@@ -116,10 +116,10 @@ const dirtTreble2 = new SliderParameters(
 
 const dirtGain2 = new SliderParameters(
   "outputGain",
+  0,
+  20,
   0.01,
-  1,
-  0.01,
-  0.5,
+  3,
   "gain",
   distortionModule2
 );
@@ -151,10 +151,12 @@ dirtGain2.sliderElement.addEventListener("input", () => {
 
 const dirtSwitch2 = new ButtonSwitch((state) => {
   if (!state) {
+    console.log(dirtSwitch2.on, "dirtSwitch2", distortionFX2.title, "off")
     distortionFX2.disconnect();
     fxModules.pop(distortionFX2);
   } else {
-    fxModules.push(distortionFX2);
+    console.log(dirtSwitch2.on, "dirtSwitch2", distortionFX2.title, "on")
+    fxModules.push(distortionFX2); 
   }
 }, distortionModule2);
 fxButtons.push(dirtSwitch2); // distortion button 2
@@ -174,12 +176,13 @@ fxButtons.forEach((button) => {
         i,
         "last active module",
         lastActiveModule.title,
+        '\n'
       );
       lastActiveModule.output.connect(fxModules[i].input);
       lastActiveModule = fxModules[i];
     }
     if (fxModules.length === 0) {
-      console.log("No FX modules connected");
+      console.log("No FX modules connected", lastActiveModule.title);
       lastActiveModule = inputMeter;
     }
     lastActiveModule.output.connect(outputMeter.input);
