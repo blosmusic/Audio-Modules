@@ -66,6 +66,7 @@ const distortionFX = new DistortionFXModule(
   dirtGain.value,
   1
 );
+fxModules.push(distortionFX);
 
 dirtValue.sliderElement.addEventListener("input", () => {
   distortionFX.setParameter("distortion", dirtValue.value);
@@ -83,10 +84,12 @@ dirtGain.sliderElement.addEventListener("input", () => {
 // const is calling the constructor from the buttonSwitch.js file
 const dirtSwitch = new ButtonSwitch((state) => {
   if (!state) {
+    console.log(dirtSwitch.on, "dirtSwitch", distortionFX.title, "off");
     distortionFX.disconnect();
-    fxModules.pop(distortionFX);
+    // fxModules.pop(distortionFX);
   } else {
-    fxModules.push(distortionFX);
+    // fxModules.push(distortionFX);
+    console.log(dirtSwitch.on, "dirtSwitch", distortionFX.title, "on");
   }
 }, distortionModule);
 fxButtons.push(dirtSwitch); // distortion button
@@ -136,6 +139,7 @@ const distortionFX2 = new DistortionFXModule(
   dirtGain2.value,
   1
 );
+fxModules.push(distortionFX2);
 
 dirtValue2.sliderElement.addEventListener("input", () => {
   distortionFX2.setParameter("distortion", dirtValue2.value);
@@ -153,10 +157,10 @@ const dirtSwitch2 = new ButtonSwitch((state) => {
   if (!state) {
     console.log(dirtSwitch2.on, "dirtSwitch2", distortionFX2.title, "off")
     distortionFX2.disconnect();
-    fxModules.pop(distortionFX2);
+    // fxModules.pop(distortionFX2);
   } else {
     console.log(dirtSwitch2.on, "dirtSwitch2", distortionFX2.title, "on")
-    fxModules.push(distortionFX2); 
+    // fxModules.push(distortionFX2); 
   }
 }, distortionModule2);
 fxButtons.push(dirtSwitch2); // distortion button 2
@@ -166,18 +170,19 @@ fxButtons.forEach((button) => {
   let lastActiveModule = inputMeter;
   button.button.addEventListener("click", () => {
     for (let i = 0; i < fxModules.length; i++) {
-      console.log(
-        "Toggle",
-        fxButtons[i].on,
-        fxModules[i].title,
-        "array length",
-        fxModules.length,
-        "index",
-        i,
-        "last active module",
-        lastActiveModule.title,
-        '\n'
-      );
+      // console.log(
+      //   "Toggle",
+      //   fxButtons[i].on,
+      //   fxModules[i].title,
+      //   "array length",
+      //   fxModules.length,
+      //   "index",
+      //   i,
+      //   "last active module",
+      //   lastActiveModule.title,
+      //   '\n'
+      // );
+      console.log(fxModules[i].title);
       lastActiveModule.output.connect(fxModules[i].input);
       lastActiveModule = fxModules[i];
     }
@@ -197,6 +202,9 @@ async function main() {
   try {
     await audioSource.open();
     console.log("Audio source opened");
+    for (let i = 0; i < fxModules.length; i++) {
+      console.log(fxModules[i].title);
+    }
     // connect the audio source to the meter
     audioSource.connect(monoSignal);
     monoSignal.connect(inputMeter.input);
