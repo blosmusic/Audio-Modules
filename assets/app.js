@@ -61,7 +61,7 @@ const dirtGain = new SliderParameters(
 const distortionFX = new DistortionFXModule(
   "distortion-module",
   "distortion",
-  "green",
+  "orange",
   1,
   dirtValue.value,
   0.1,
@@ -70,7 +70,6 @@ const distortionFX = new DistortionFXModule(
   dirtGain.value,
   1
 );
-fxModules.push(distortionFX);
 
 dirtValue.sliderElement.addEventListener("input", () => {
   distortionFX.setParameter("distortion", dirtValue.value);
@@ -96,7 +95,6 @@ const dirtSwitch = new ButtonSwitch((state) => {
     // console.log(dirtSwitch.on, "dirtSwitch", distortionFX.title, "on");
   }
 }, distortionModule);
-fxButtons.push(dirtSwitch); // distortion button
 
 // FX Module Setup 2
 const distortionModule2 = document.getElementById("distortion-module-2");
@@ -143,7 +141,7 @@ const distortionFX2 = new DistortionFXModule(
   dirtGain2.value,
   1
 );
-fxModules.push(distortionFX2);
+
 
 dirtValue2.sliderElement.addEventListener("input", () => {
   distortionFX2.setParameter("distortion", dirtValue2.value);
@@ -167,13 +165,16 @@ const dirtSwitch2 = new ButtonSwitch((state) => {
     // fxModules.push(distortionFX2);
   }
 }, distortionModule2);
-fxButtons.push(dirtSwitch2); // distortion button 2
 
 // add the fx modules to the fxModules array
-fxModules.push(trebleboostFX);
+fxModules.push(trebleboostFX); // treble boost module
+fxModules.push(distortionFX);
+fxModules.push(distortionFX2);
 
 // add the fx buttons to the fxButtons array
 fxButtons.push(trebleboostSwitch);
+fxButtons.push(dirtSwitch); // distortion button
+fxButtons.push(dirtSwitch2); // distortion button 2
 
 // manage the button states and turn on/off the fx modules
 fxButtons.forEach((button) => {
