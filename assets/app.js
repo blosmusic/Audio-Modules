@@ -185,7 +185,7 @@ fxButtons.forEach((button) => {
     }
     // connect the last active module to the output meter
     lastActiveModule.output.connect(outputMeter.input);
-    console.log(lastActiveModule.title, "last active module"); // this is the last active module
+    // console.log(lastActiveModule.title, "last active module"); // this is the last active module
     // connect the output meter to the destination
     outputMeter.output.connect(destination);
   });
