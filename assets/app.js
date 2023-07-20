@@ -168,6 +168,8 @@ fxButtons.push(dirtSwitch2); // distortion button 2
 // manage the button states and turn on/off the fx modules
 fxButtons.forEach((button) => {
   button.button.addEventListener("click", () => {
+    // Disconnect all modules from the inputMeter.input to establish new connections
+    inputMeter.output.disconnect();
     // assign the last active module to the input meter
     let lastActiveModule = inputMeter;
 
@@ -177,19 +179,17 @@ fxButtons.forEach((button) => {
         lastActiveModule.output.connect(fxModules[i].input);
         lastActiveModule = fxModules[i];
       } else {
-        // console.log("loop", fxButtons[i].on, fxModules[i].title, "off"); 
-        // fxModules[i].disconnect();
+        // console.log("loop", fxButtons[i].on, fxModules[i].title, "off");
+        fxModules[i].output.disconnect();
       }
-      // console.log(lastActiveModule.title, "last active module"); // this is the last active module
-      lastActiveModule.output.connect(outputMeter.input);
-      outputMeter.output.connect(destination);
     }
+    // connect the last active module to the output meter
+    lastActiveModule.output.connect(outputMeter.input);
+    console.log(lastActiveModule.title, "last active module"); // this is the last active module
+    // connect the output meter to the destination
+    outputMeter.output.connect(destination);
   });
 });
-
-// TODO - set default state of audio chain
-// TODO - ensure that when a module is reconnected the audio chain is reconnected correctly ie 
-// gain nodes at zero mean mute
 
 // Main function
 async function main() {
@@ -206,6 +206,7 @@ async function main() {
     audioSource.connect(monoSignal);
     monoSignal.connect(inputMeter.input);
     // connect the meter to the FX module array
+
     inputMeter.output.connect(outputMeter.input);
     outputMeter.output.connect(destination);
   } catch (error) {
