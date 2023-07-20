@@ -84,12 +84,12 @@ dirtGain.sliderElement.addEventListener("input", () => {
 // const is calling the constructor from the buttonSwitch.js file
 const dirtSwitch = new ButtonSwitch((state) => {
   if (!state) {
-    console.log(dirtSwitch.on, "dirtSwitch", distortionFX.title, "off");
+    // console.log(dirtSwitch.on, "dirtSwitch", distortionFX.title, "off");
     distortionFX.disconnect();
     // fxModules.pop(distortionFX);
   } else {
     // fxModules.push(distortionFX);
-    console.log(dirtSwitch.on, "dirtSwitch", distortionFX.title, "on");
+    // console.log(dirtSwitch.on, "dirtSwitch", distortionFX.title, "on");
   }
 }, distortionModule);
 fxButtons.push(dirtSwitch); // distortion button
@@ -155,11 +155,11 @@ dirtGain2.sliderElement.addEventListener("input", () => {
 
 const dirtSwitch2 = new ButtonSwitch((state) => {
   if (!state) {
-    console.log(dirtSwitch2.on, "dirtSwitch2", distortionFX2.title, "off");
+    // console.log(dirtSwitch2.on, "dirtSwitch2", distortionFX2.title, "off");
     distortionFX2.disconnect();
     // fxModules.pop(distortionFX2);
   } else {
-    console.log(dirtSwitch2.on, "dirtSwitch2", distortionFX2.title, "on");
+    // console.log(dirtSwitch2.on, "dirtSwitch2", distortionFX2.title, "on");
     // fxModules.push(distortionFX2);
   }
 }, distortionModule2);
@@ -173,19 +173,23 @@ fxButtons.forEach((button) => {
 
     for (let i = 0; i < fxModules.length; i++) {
       if (fxButtons[i].on) {
-        console.log("loop", fxButtons[i].on, fxModules[i].title, "on");
+        // console.log("loop", fxButtons[i].on, fxModules[i].title, "on");
         lastActiveModule.output.connect(fxModules[i].input);
         lastActiveModule = fxModules[i];
       } else {
-        console.log("loop", fxButtons[i].on, fxModules[i].title, "off");
+        // console.log("loop", fxButtons[i].on, fxModules[i].title, "off"); 
         // fxModules[i].disconnect();
       }
-      console.log(lastActiveModule.title, "last active module");
+      // console.log(lastActiveModule.title, "last active module"); // this is the last active module
       lastActiveModule.output.connect(outputMeter.input);
       outputMeter.output.connect(destination);
     }
   });
 });
+
+// TODO - set default state of audio chain
+// TODO - ensure that when a module is reconnected the audio chain is reconnected correctly ie 
+// gain nodes at zero mean mute
 
 // Main function
 async function main() {
