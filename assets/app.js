@@ -1,8 +1,12 @@
 // Import Modules
 import Meter from "./modules/audioModules/meterModule.js";
-import SliderParameters from "./modules/fxModules/sliderParameters.js";
-import ButtonSwitch from "./modules/fxModules/buttonSwitch.js";
-import DistortionFXModule from "./modules/fxModules/distortionFX.js";
+import SliderParameters from "./modules/fxModuleObjectConstructors/sliderParameters.js";
+import ButtonSwitch from "./modules/fxModuleObjectConstructors/buttonSwitch.js";
+import DistortionFXModule from "./modules/fxModuleObjectConstructors/distortionFX.js";
+import {
+  trebleboostFX,
+  trebleboostSwitch,
+} from "./modules/fxModulesInstances/trebleboostFX.js";
 
 // Audio Context Setup
 Tone.context.lookAhead = 0;
@@ -164,6 +168,12 @@ const dirtSwitch2 = new ButtonSwitch((state) => {
   }
 }, distortionModule2);
 fxButtons.push(dirtSwitch2); // distortion button 2
+
+// add the fx modules to the fxModules array
+fxModules.push(trebleboostFX);
+
+// add the fx buttons to the fxButtons array
+fxButtons.push(trebleboostSwitch);
 
 // manage the button states and turn on/off the fx modules
 fxButtons.forEach((button) => {

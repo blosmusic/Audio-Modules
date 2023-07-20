@@ -1,6 +1,3 @@
-import SliderParameters from "./sliderParameters.js";
-import ButtonSwitch from "./buttonSwitch.js";
-
 class DistortionFXModule {
   constructor(
     id,
