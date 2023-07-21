@@ -9,7 +9,7 @@ import {
 import {
   distortionFX2,
   distortionSwitch2,
-} from "./modules/fxModulesInstances/distortionIIFX.js";
+} from "./modules/fxModulesInstances/distortionPlusFX.js";
 
 // Create an array to host the FX modules
 const fxModules = [];

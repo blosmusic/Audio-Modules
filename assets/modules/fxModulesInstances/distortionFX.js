@@ -18,7 +18,7 @@ const distortionValue = new SliderParameters(
 );
 const distortionToneBoost = new SliderParameters(
   "midGain",
-  0,
+  -20,
   26.5,
   0.01,
   0,

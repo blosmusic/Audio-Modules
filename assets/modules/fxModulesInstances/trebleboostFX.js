@@ -18,8 +18,8 @@ const trebleboostValue = new SliderParameters(
 );
 const trebleboostTreble = new SliderParameters(
   "highGain",
-  0,
-  10,
+  -15,
+  15,
   0.01,
   0,
   "tone",
