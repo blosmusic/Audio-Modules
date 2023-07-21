@@ -1,5 +1,5 @@
-import SliderParameters from "../fxModuleObjectConstructors/sliderParameters.js";
-import ButtonSwitch from "../fxModuleObjectConstructors/buttonSwitch.js";
+import SliderParameters from "../audioModulesAndComponents/sliderParameters.js";
+import ButtonSwitch from "../audioModulesAndComponents/buttonSwitch.js";
 import DistortionFXModule from "../fxModuleObjectConstructors/distortionFXModule.js";
 
 // FX Module Setup

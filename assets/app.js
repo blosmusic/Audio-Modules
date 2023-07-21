@@ -1,5 +1,5 @@
 // Import Modules
-import Meter from "./modules/audioModules/meterModule.js";
+import Meter from "./modules/audioModulesAndComponents/meterModule.js";
 import { fxModules, fxButtons } from "./modules.js";
 
 // Audio Context Setup
