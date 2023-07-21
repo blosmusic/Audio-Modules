@@ -157,6 +157,12 @@ input[type="range"] {
   margin: 20px 10px;
   text-transform: uppercase;
   position: relative;
+  justify-content: space-between;
+}
+
+.slider-section {
+  width: 100%;
+  border: #00ff91 1px solid;
 }
 
 .slider-container label {

@@ -34,7 +34,6 @@ class SliderParameters {
 
     const sliderWrapper = document.createElement("div");
     sliderWrapper.classList.add("slider-wrapper");
-    sliderWrapper.style.order = "2";
 
     this.sliderElement = document.createElement("input");
     this.sliderElement.classList.add("slider");

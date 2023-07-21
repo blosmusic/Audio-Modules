@@ -6,6 +6,7 @@ import DistortionFXModule from "../fxModuleObjectConstructors/distortionFXModule
 // based on a typical ds-1 circuit
 // https://www.electrosmash.com/boss-ds1-analysis
 const distortionModule = document.getElementById("distortion-module");
+
 // slider constructor: (id, min, max, step, value, label, moduleContainer)
 const distortionValue = new SliderParameters(
   "distortion",

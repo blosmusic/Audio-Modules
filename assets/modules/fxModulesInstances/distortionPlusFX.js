@@ -7,6 +7,7 @@ import DistortionFXModule from "../fxModuleObjectConstructors/distortionFXModule
 // https://www.electrosmash.com/mxr-distortion-plus-analysis
 const distortionModule2 = document.getElementById("distortion-module-2");
 
+// slider constructor: (id, min, max, step, value, label, moduleContainer)
 const distortionValue2 = new SliderParameters(
   "distortion",
   0,
