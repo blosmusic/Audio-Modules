@@ -37,6 +37,7 @@ class SliderParameters {
     sliderWrapper.style.order = "2";
 
     this.sliderElement = document.createElement("input");
+    this.sliderElement.classList.add("slider");
     this.sliderElement.type = "range";
     this.sliderElement.min = this.minValue;
     this.sliderElement.max = this.maxValue;
