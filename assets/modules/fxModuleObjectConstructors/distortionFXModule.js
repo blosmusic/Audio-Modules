@@ -8,8 +8,10 @@ class DistortionFXModule {
     lowGain,
     midGain,
     highGain,
+    lowFrequencyThreshold,
+    highFrequencyThreshold,
     outputGain,
-    wetDryMix,
+    wetDryMix
   ) {
     // Create components
     this.id = id;
@@ -20,11 +22,17 @@ class DistortionFXModule {
       oversample: "2x",
       wet: wetDryMix, // a value between 0 and 1
     });
-    this.eq = new Tone.EQ3(lowGain, midGain, highGain);
+    // set the EQ parameters and thresholds
+    this.eq = new Tone.EQ3({
+      low: lowGain,
+      mid: midGain,
+      high: highGain,
+      lowFrequency: lowFrequencyThreshold,
+      highFrequency: highFrequencyThreshold,
+    });
     this.output = new Tone.Gain(outputGain);
 
     // Connect the components
-    // order based on https://www.electrosmash.com/tube-screamer-analysis
     this.input.connect(this.distortion);
     this.distortion.connect(this.eq);
     this.eq.connect(this.output);

@@ -1,6 +1,6 @@
 import SliderParameters from "../fxModuleObjectConstructors/sliderParameters.js";
 import ButtonSwitch from "../fxModuleObjectConstructors/buttonSwitch.js";
-import DistortionFXModule from "../fxModuleObjectConstructors/distortionFX.js";
+import DistortionFXModule from "../fxModuleObjectConstructors/distortionFXModule.js";
 
 // FX Module Setup
 // based on a typical tube screamer circuit
@@ -10,7 +10,7 @@ const trebleboostModule = document.getElementById("trebleboost-module");
 const trebleboostValue = new SliderParameters(
   "distortion",
   0,
-  1,
+  41,
   0.01,
   0.5,
   "overdrive",
@@ -30,25 +30,26 @@ const trebleboostGain = new SliderParameters(
   0.01,
   10,
   0.01,
-  5,
+  1,
   "level",
   trebleboostModule
 );
 
-// trebleboost constructor: (id, title, colour, inputGain, trebleboostAmount, lowGain, midGain, highGain, outputGain, wetDryMix)
+// DistortionFXModule constructor: (id, title, colour, inputGain, distortionAmount, lowGain, midGain, highGain, lowFrequencyThreshold, highFrequencyThreshold, outputGain, wetDryMix)
 const trebleboostFX = new DistortionFXModule(
   "trebleboost-module",
   "treble boost",
   "green",
   1,
   trebleboostValue.value,
-  0.1,
-  0.3,
+  0,
+  0.5,
   trebleboostTreble.value,
+  720,
+  10000,
   trebleboostGain.value,
   1
 );
-// fxModules.push(trebleboostFX);
 
 trebleboostValue.sliderElement.addEventListener("input", () => {
   trebleboostFX.setParameter("distortion", trebleboostValue.value);
@@ -68,12 +69,9 @@ const trebleboostSwitch = new ButtonSwitch((state) => {
   if (!state) {
     // console.log(trebleboostSwitch.on, "trebleboostSwitch", trebleboostFX.title, "off");
     trebleboostFX.disconnect();
-    // fxModules.pop(trebleboostFX);
   } else {
-    // fxModules.push(trebleboostFX);
     // console.log(trebleboostSwitch.on, "trebleboostSwitch", trebleboostFX.title, "on");
   }
 }, trebleboostModule);
-// fxButtons.push(trebleboostSwitch); // trebleboost button
 
-export {trebleboostFX, trebleboostSwitch};
+export { trebleboostFX, trebleboostSwitch };
