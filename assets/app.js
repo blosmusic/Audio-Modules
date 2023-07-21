@@ -76,14 +76,10 @@ async function main() {
   try {
     await audioSource.open();
     console.log("Audio source opened");
-    // for (let i = 0; i < fxModules.length; i++) {
-    //   console.log(fxModules[i].title);
-    // }
     // connect the audio source to the meter
     audioSource.connect(monoSignal);
+    // default connection
     monoSignal.connect(inputMeter.input);
-    // connect the meter to the FX module array
-
     inputMeter.output.connect(outputMeter.input);
     outputMeter.output.connect(destination);
   } catch (error) {
