@@ -22,7 +22,7 @@ const distortionGain2 = new SliderParameters(
   0,
   20,
   0.01,
-  3,
+  1,
   "output",
   distortionModule2
 );
