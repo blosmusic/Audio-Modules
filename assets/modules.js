@@ -18,6 +18,10 @@ import {
   phaserFX,
   phaserSwitch,
 } from "./modules/fxModulesInstances/phaserFX.js";
+import {
+  delayFX,
+  delaySwitch,
+} from "./modules/fxModulesInstances/delayFX.js";
 
 // Create an array to host the FX modules
 const fxModules = [];
@@ -34,6 +38,9 @@ fxModules.push(distortionFX2); // distortion module 2
 fxModules.push(chorusFX); // chorus module
 fxModules.push(phaserFX); // phaser module
 
+// Delay and Reverb
+fxModules.push(delayFX); // delay module
+
 // add the fx buttons to the fxButtons array
 // Gains, Distortions, Overdrives
 fxButtons.push(trebleboostSwitch); // treble boost button
@@ -43,5 +50,8 @@ fxButtons.push(distortionSwitch2); // distortion button 2
 // Modulation
 fxButtons.push(chorusSwitch); // chorus button
 fxButtons.push(phaserSwitch); // phaser button
+
+// Delay and Reverb
+fxButtons.push(delaySwitch); // delay button
 
 export { fxModules, fxButtons };

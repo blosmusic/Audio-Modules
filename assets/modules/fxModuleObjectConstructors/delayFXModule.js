@@ -1,34 +1,30 @@
-class PhaserFXModule {
+class DelayFXModule {
   constructor(
     id,
     title,
     colour,
     inputGain,
-    q,
-    baseFrequecy,
-    frequency,
-    octaves,
-    stages,
-    wet,
+    delayTime,
+    feedback,
+    maxDelayTime,
+    wetDryMix,
     outputGain
   ) {
     // Create components
     this.id = id;
     this.title = title;
     this.input = new Tone.Gain(inputGain); // typically 1
-    this.phaser = new Tone.Phaser({
-      q: q,
-      baseFrequency: baseFrequecy,
-      frequency: frequency,
-      octaves: octaves,
-      stages: stages,
-      wet: wet, // a value between 0 and 1
+    this.delay = new Tone.FeedbackDelay({
+      delayTime: delayTime,
+      feedback: feedback,
+      maxDelay: maxDelayTime,
+      wet: wetDryMix, // a value between 0 and 1
     });
     this.output = new Tone.Gain(outputGain);
 
     // Connect the components
-    this.input.connect(this.phaser);
-    this.phaser.connect(this.output);
+    this.input.connect(this.delay);
+    this.delay.connect(this.output);
 
     // Attach the module to the HTML element with the provided id
     const moduleElement = document.getElementById(id);
@@ -45,11 +41,12 @@ class PhaserFXModule {
   }
 
   get wetDryMix() {
-    return this.phaser.wet.value;
+    console.log("wetDryMix", this.delay.wet.value);
+    return this.delay.wet.value;
   }
 
   set wetDryMix(value) {
-    this.phaser.wet.value = value;
+    this.delay.wet.value = value;
   }
 
   setParameter(parameterName, value) {
@@ -57,26 +54,21 @@ class PhaserFXModule {
       case "inputGain":
         this.input.gain.value = value;
         break;
-      case "q":
-        this.phaser.set({ q: value });
+      case "delayTime":
+        this.delay.set({ delayTime: value });
         break;
-      case "baseFrequency":
-        this.phaser.set({ baseFrequency: value });
+      case "feedback":
+        this.delay.set({ feedback: value });
         break;
-      case "frequency":
-        this.phaser.set({ frequency: value });
+      case "maxDelayTime":
+        this.delay.set({ maxDelay: value });
         break;
-      case "octaves":
-        this.phaser.set({ octaves: value });
-        break;
-      case "stages":
-        this.phaser.set({ stages: value });
-        break;
-      case "wet":
-        this.phaser.set({ wet: value });
+      case "wetDryMix":
+        console.log("wetDryMix", value);
+        this.delay.set({ wet: value });
         break;
       default:
-        console.log("Invalid parameter name");
+        console.log("Invalid parameter name: " + parameterName);
     }
   }
 
@@ -89,4 +81,4 @@ class PhaserFXModule {
   }
 }
 
-export default PhaserFXModule;
+export default DelayFXModule;
