@@ -1,14 +1,14 @@
-class ChorusFXModule {
+class PhaserFXModule {
   constructor(
     id,
     title,
     colour,
     inputGain,
+    q,
+    baseFrequecy,
     frequency,
-    delayTime,
-    depth,
-    type,
-    spread,
+    octaves,
+    stages,
     wet,
     outputGain
   ) {
@@ -16,19 +16,19 @@ class ChorusFXModule {
     this.id = id;
     this.title = title;
     this.input = new Tone.Gain(inputGain); // typically 1
-    this.chorus = new Tone.Chorus({
-      frequency: frequency,
-      delayTime: delayTime,
-      depth: depth,
-      type: type,
-      spread: spread,
-      wet: wet, // a value between 0 and 1
+    this.phaser = new Tone.Phaser({
+        q: q,
+        baseFrequency: baseFrequecy,
+        frequency: frequency,
+        octaves: octaves,
+        stages: stages,
+        wet: wet, // a value between 0 and 1
     });
     this.output = new Tone.Gain(outputGain);
 
     // Connect the components
-    this.input.connect(this.chorus.start());
-    this.chorus.connect(this.output);
+    this.input.connect(this.phaser);
+    this.phaser.connect(this.output);
 
     // Attach the module to the HTML element with the provided id
     const moduleElement = document.getElementById(id);
@@ -45,11 +45,11 @@ class ChorusFXModule {
   }
 
     get wetDryMix() {
-        return this.chorus.wet.value;
+        return this.phaser.wet.value;
         }
 
     set wetDryMix(value) {
-        this.chorus.wet.value = value;
+        this.phaser.wet.value = value;
         }
 
     setParameter(parameterName, value) {
@@ -57,29 +57,23 @@ class ChorusFXModule {
             case "inputGain":
                 this.input.gain.value = value;
                 break;
+            case "q":
+                this.phaser.set({q: value})
+                break;
+            case "baseFrequency":
+                this.phaser.set({baseFrequency: value})
+                break;
             case "frequency":
-                this.chorus.set({frequency: value})
+                this.phaser.set({frequency: value})
                 break;
-            case "delayTime":
-                this.chorus.set({delayTime: value})
+            case "octaves":
+                this.phaser.set({octaves: value})
                 break;
-            case "depth":
-                this.chorus.set({depth: value})
-                break;
-            case "type":
-                this.chorus.set({type: value})
-                break;
-            case "spread":
-                this.chorus.set({spread: value})
-                break;
-            case "outputGain":
-                this.output.gain.value = value;
-                break;
-            case "wetDryMix":
-                this.chorus.set({wet: value})
+            case "stages":
+                this.phaser.set({stages: value})
                 break;
             default:
-                console.log("No parameter of name " + parameterName);
+                console.log("Invalid parameter name");
         }
     }
 
@@ -92,4 +86,4 @@ class ChorusFXModule {
     }
 }
 
-export default ChorusFXModule;
+export default PhaserFXModule;

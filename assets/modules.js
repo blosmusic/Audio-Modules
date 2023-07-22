@@ -14,6 +14,10 @@ import {
   chorusFX,
   chorusSwitch,
 } from "./modules/fxModulesInstances/chorusFX.js";
+import {
+  phaserFX,
+  phaserSwitch,
+} from "./modules/fxModulesInstances/phaserFX.js";
 
 // Create an array to host the FX modules
 const fxModules = [];
@@ -28,6 +32,7 @@ fxModules.push(distortionFX2); // distortion module 2
 
 // Modulation
 fxModules.push(chorusFX); // chorus module
+fxModules.push(phaserFX); // phaser module
 
 // add the fx buttons to the fxButtons array
 // Gains, Distortions, Overdrives
@@ -37,5 +42,6 @@ fxButtons.push(distortionSwitch2); // distortion button 2
 
 // Modulation
 fxButtons.push(chorusSwitch); // chorus button
+fxButtons.push(phaserSwitch); // phaser button
 
 export { fxModules, fxButtons };
