@@ -8,10 +8,10 @@ const phaserModule = document.getElementById("phaser-module");
 // slider constructor: (id, min, max, step, value, label, moduleContainer)
 const phaserDepth = new SliderParameters(
   "baseFrequency",
-  50,
-  500,
-  1,
-  350,
+  3,
+  10,
+  0.01,
+  6,
   "depth",
   phaserModule
 );
@@ -21,7 +21,7 @@ const phaserRate = new SliderParameters(
   0.1,
   10,
   0.01,
-  5,
+  3,
   "rate",
   phaserModule
 );
