@@ -32,11 +32,11 @@ const phaserFX = new PhaserFXModule(
   "phaser",
   "orangered",
   1,
-  6,
+  3,
   phaserDepth.value,
   phaserRate.value,
   6,
-  6,
+  10,
   1,
   1
 );
