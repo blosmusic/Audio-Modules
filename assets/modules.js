@@ -1,5 +1,9 @@
 // Pitch, Filters, and EQs
 import {
+  volumeFX,
+  volumeSwitch,
+} from "./modules/fxModulesInstances/volumeFX.js";
+import {
   pitchShifterFX,
   pitchShifterSwitch,
 } from "./modules/fxModulesInstances/pitchshifterFX.js";
@@ -72,6 +76,7 @@ const fxButtons = [];
 
 // add the fx modules to the fxModules array
 // Pitch, Filters, and EQs
+fxModules.push(volumeFX); // volume module
 fxModules.push(pitchShifterFX); // pitch shifter module
 fxModules.push(compressorFX); // compressor module
 fxModules.push(autowahFX); // autowah module
@@ -98,6 +103,7 @@ fxModules.push(jcreverbFX); // jcreverb module
 
 // add the fx buttons to the fxButtons array
 // Pitch, Filters, and EQs
+fxButtons.push(volumeSwitch); // volume button
 fxButtons.push(pitchShifterSwitch); // pitch shifter button
 fxButtons.push(compressorSwitch); // compressor button
 fxButtons.push(autowahSwitch); // autowah button
