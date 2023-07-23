@@ -1,15 +1,21 @@
+// Pitch, Filters, and EQs
 import {
   pitchShifterFX,
   pitchShifterSwitch,
 } from "./modules/fxModulesInstances/pitchshifterFX.js";
 import {
-  trebleboostFX,
-  trebleboostSwitch,
-} from "./modules/fxModulesInstances/trebleboostFX.js";
+  compressorFX,
+  compressorSwitch,
+} from "./modules/fxModulesInstances/compressorFX.js";
 import {
   autowahFX,
   autowahSwitch,
 } from "./modules/fxModulesInstances/autowahFX.js";
+// Gains, Distortions, Overdrives, and Fuzzes
+import {
+  trebleboostFX,
+  trebleboostSwitch,
+} from "./modules/fxModulesInstances/trebleboostFX.js";
 import {
   distortionFX,
   distortionSwitch,
@@ -27,6 +33,7 @@ import {
   chebyshevDistortionSwitch,
 } from "./modules/fxModulesInstances/chebydistortionFX.js";
 import { fuzzFX, fuzzSwitch } from "./modules/fxModulesInstances/fuzzFX.js";
+// Modulation
 import {
   chorusFX,
   chorusSwitch,
@@ -43,6 +50,7 @@ import {
   vibratoFX,
   vibratoSwitch,
 } from "./modules/fxModulesInstances/vibratoFX.js";
+// Delay and Reverb
 import { delayFX, delaySwitch } from "./modules/fxModulesInstances/delayFX.js";
 import {
   pingpongDelayFX,
@@ -65,9 +73,10 @@ const fxButtons = [];
 // add the fx modules to the fxModules array
 // Pitch, Filters, and EQs
 fxModules.push(pitchShifterFX); // pitch shifter module
+fxModules.push(compressorFX); // compressor module
 fxModules.push(autowahFX); // autowah module
 
-// Gains, Distortions, Overdrives
+// Gains, Distortions, Overdrives, and Fuzzes
 fxModules.push(trebleboostFX); // treble boost module
 fxModules.push(distortionFX); // distortion module
 fxModules.push(distortionFX2); // distortion module 2
@@ -90,9 +99,10 @@ fxModules.push(jcreverbFX); // jcreverb module
 // add the fx buttons to the fxButtons array
 // Pitch, Filters, and EQs
 fxButtons.push(pitchShifterSwitch); // pitch shifter button
+fxButtons.push(compressorSwitch); // compressor button
 fxButtons.push(autowahSwitch); // autowah button
 
-// Gains, Distortions, Overdrives
+// Gains, Distortions, Overdrives, and Fuzzes
 fxButtons.push(trebleboostSwitch); // treble boost button
 fxButtons.push(distortionSwitch); // distortion button
 fxButtons.push(distortionSwitch2); // distortion button 2
