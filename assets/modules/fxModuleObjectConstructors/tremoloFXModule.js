@@ -27,8 +27,8 @@ class TremoloFXModule {
     this.tremolo.connect(this.output);
 
     // Connect the components
-    input.connect(tremolo);
-    tremolo.connect(output);
+    this.input.connect(this.tremolo.start());
+    this.tremolo.connect(this.output);
 
     // Attach the module to the HTML element with the provided id
     const moduleElement = document.getElementById(id);

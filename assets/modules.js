@@ -19,6 +19,10 @@ import {
   phaserSwitch,
 } from "./modules/fxModulesInstances/phaserFX.js";
 import {
+  tremoloFX,
+  tremoloSwitch,
+} from "./modules/fxModulesInstances/tremoloFX.js";
+import {
   delayFX,
   delaySwitch,
 } from "./modules/fxModulesInstances/delayFX.js";
@@ -37,6 +41,7 @@ fxModules.push(distortionFX2); // distortion module 2
 // Modulation
 fxModules.push(chorusFX); // chorus module
 fxModules.push(phaserFX); // phaser module
+fxModules.push(tremoloFX); // tremolo module
 
 // Delay and Reverb
 fxModules.push(delayFX); // delay module
@@ -50,6 +55,7 @@ fxButtons.push(distortionSwitch2); // distortion button 2
 // Modulation
 fxButtons.push(chorusSwitch); // chorus button
 fxButtons.push(phaserSwitch); // phaser button
+fxButtons.push(tremoloSwitch); // tremolo button
 
 // Delay and Reverb
 fxButtons.push(delaySwitch); // delay button
