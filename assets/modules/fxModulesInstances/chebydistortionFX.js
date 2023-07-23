@@ -10,8 +10,8 @@ const chebyshevDistortionModule = document.getElementById(
 // slider constructor: (id, min, max, step, value, label, moduleContainer)
 const chebyshevDistortionValue = new SliderParameters(
   "order",
-  1,
-  35,
+  2,
+  50,
   1,
   5,
   "order",
@@ -20,8 +20,8 @@ const chebyshevDistortionValue = new SliderParameters(
 
 const chebyshevDistortionToneBoost = new SliderParameters(
   "midGain",
-  -20,
-  26.5,
+  0,
+  30,
   0.01,
   0,
   "tone",

@@ -26,6 +26,7 @@ import {
   chebyshevDistortionFX,
   chebyshevDistortionSwitch,
 } from "./modules/fxModulesInstances/chebydistortionFX.js";
+import { fuzzFX, fuzzSwitch } from "./modules/fxModulesInstances/fuzzFX.js";
 import {
   chorusFX,
   chorusSwitch,
@@ -42,10 +43,7 @@ import {
   vibratoFX,
   vibratoSwitch,
 } from "./modules/fxModulesInstances/vibratoFX.js";
-import {
-  delayFX,
-  delaySwitch,
-} from "./modules/fxModulesInstances/delayFX.js";
+import { delayFX, delaySwitch } from "./modules/fxModulesInstances/delayFX.js";
 import {
   pingpongDelayFX,
   pingpongDelaySwitch,
@@ -75,6 +73,7 @@ fxModules.push(distortionFX); // distortion module
 fxModules.push(distortionFX2); // distortion module 2
 fxModules.push(bitcrusherFX); // bitcrusher module
 fxModules.push(chebyshevDistortionFX); // chebyshev distortion module
+fxModules.push(fuzzFX); // fuzz module
 
 // Modulation
 fxModules.push(chorusFX); // chorus module
@@ -89,7 +88,7 @@ fxModules.push(reverbFX); // reverb module
 fxModules.push(jcreverbFX); // jcreverb module
 
 // add the fx buttons to the fxButtons array
-// Pitch, Filters, and EQs 
+// Pitch, Filters, and EQs
 fxButtons.push(pitchShifterSwitch); // pitch shifter button
 fxButtons.push(autowahSwitch); // autowah button
 
@@ -99,6 +98,7 @@ fxButtons.push(distortionSwitch); // distortion button
 fxButtons.push(distortionSwitch2); // distortion button 2
 fxButtons.push(bitcrusherSwitch); // bitcrusher button
 fxButtons.push(chebyshevDistortionSwitch); // chebyshev distortion button
+fxButtons.push(fuzzSwitch); // fuzz button
 
 // Modulation
 fxButtons.push(chorusSwitch); // chorus button
