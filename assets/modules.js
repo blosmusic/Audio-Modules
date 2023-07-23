@@ -7,6 +7,10 @@ import {
   trebleboostSwitch,
 } from "./modules/fxModulesInstances/trebleboostFX.js";
 import {
+  autowahFX,
+  autowahSwitch,
+} from "./modules/fxModulesInstances/autowahFX.js";
+import {
   distortionFX,
   distortionSwitch,
 } from "./modules/fxModulesInstances/distortionFX.js";
@@ -22,10 +26,6 @@ import {
   chebyshevDistortionFX,
   chebyshevDistortionSwitch,
 } from "./modules/fxModulesInstances/chebydistortionFX.js";
-import {
-  autowahFX,
-  autowahSwitch,
-} from "./modules/fxModulesInstances/autowahFX.js";
 import {
   chorusFX,
   chorusSwitch,
@@ -65,8 +65,9 @@ const fxModules = [];
 const fxButtons = [];
 
 // add the fx modules to the fxModules array
-// Pitch
+// Pitch, Filters, and EQs
 fxModules.push(pitchShifterFX); // pitch shifter module
+fxModules.push(autowahFX); // autowah module
 
 // Gains, Distortions, Overdrives
 fxModules.push(trebleboostFX); // treble boost module
@@ -74,9 +75,6 @@ fxModules.push(distortionFX); // distortion module
 fxModules.push(distortionFX2); // distortion module 2
 fxModules.push(bitcrusherFX); // bitcrusher module
 fxModules.push(chebyshevDistortionFX); // chebyshev distortion module
-
-// Filters and EQs
-fxModules.push(autowahFX); // autowah module
 
 // Modulation
 fxModules.push(chorusFX); // chorus module
@@ -91,8 +89,9 @@ fxModules.push(reverbFX); // reverb module
 fxModules.push(jcreverbFX); // jcreverb module
 
 // add the fx buttons to the fxButtons array
-// Pitch
+// Pitch, Filters, and EQs 
 fxButtons.push(pitchShifterSwitch); // pitch shifter button
+fxButtons.push(autowahSwitch); // autowah button
 
 // Gains, Distortions, Overdrives
 fxButtons.push(trebleboostSwitch); // treble boost button
@@ -100,9 +99,6 @@ fxButtons.push(distortionSwitch); // distortion button
 fxButtons.push(distortionSwitch2); // distortion button 2
 fxButtons.push(bitcrusherSwitch); // bitcrusher button
 fxButtons.push(chebyshevDistortionSwitch); // chebyshev distortion button
-
-// Filters and EQs
-fxButtons.push(autowahSwitch); // autowah button
 
 // Modulation
 fxButtons.push(chorusSwitch); // chorus button
