@@ -64,8 +64,10 @@ class DelayFXModule {
         this.delay.set({ maxDelay: value });
         break;
       case "wet":
-        // console.log("wetDryMix", value);
         this.delay.set({ wet: value });
+        break;
+      case "outputGain":
+        this.output.gain.value = value;
         break;
       default:
         console.log("Invalid parameter name: " + parameterName);
