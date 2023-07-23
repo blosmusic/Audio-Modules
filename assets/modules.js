@@ -26,6 +26,10 @@ import {
   delayFX,
   delaySwitch,
 } from "./modules/fxModulesInstances/delayFX.js";
+import {
+  pingpongDelayFX,
+  pingpongDelaySwitch,
+} from "./modules/fxModulesInstances/pingpongDelayFX.js";
 
 // Create an array to host the FX modules
 const fxModules = [];
@@ -45,6 +49,7 @@ fxModules.push(tremoloFX); // tremolo module
 
 // Delay and Reverb
 fxModules.push(delayFX); // delay module
+fxModules.push(pingpongDelayFX); // pingpong delay module
 
 // add the fx buttons to the fxButtons array
 // Gains, Distortions, Overdrives
@@ -59,5 +64,6 @@ fxButtons.push(tremoloSwitch); // tremolo button
 
 // Delay and Reverb
 fxButtons.push(delaySwitch); // delay button
+fxButtons.push(pingpongDelaySwitch); // pingpong delay button
 
 export { fxModules, fxButtons };

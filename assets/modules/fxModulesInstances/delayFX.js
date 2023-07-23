@@ -58,7 +58,7 @@ delayFeedback.sliderElement.addEventListener("input", () => {
 });
 
 delayWetDryMix.sliderElement.addEventListener("input", () => {
-  delayFX.setParameter("wetDryMix", delayWetDryMix.value);
+  delayFX.setParameter("wet", delayWetDryMix.value);
 });
 
 // button constructor: (callback, module)

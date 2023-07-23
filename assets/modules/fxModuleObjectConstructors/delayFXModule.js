@@ -41,7 +41,7 @@ class DelayFXModule {
   }
 
   get wetDryMix() {
-    console.log("wetDryMix", this.delay.wet.value);
+    // console.log("wetDryMix", this.delay.wet.value);
     return this.delay.wet.value;
   }
 
@@ -63,8 +63,8 @@ class DelayFXModule {
       case "maxDelayTime":
         this.delay.set({ maxDelay: value });
         break;
-      case "wetDryMix":
-        console.log("wetDryMix", value);
+      case "wet":
+        // console.log("wetDryMix", value);
         this.delay.set({ wet: value });
         break;
       default:
