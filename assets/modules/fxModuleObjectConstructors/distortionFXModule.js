@@ -12,7 +12,7 @@ class DistortionFXModule {
     highFrequencyThreshold,
     outputGain,
     wetDryMix
-  ) {
+  ) { 
     // Create components
     this.id = id;
     this.title = title;
