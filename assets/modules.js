@@ -1,4 +1,8 @@
 import {
+  pitchShifterFX,
+  pitchShifterSwitch,
+} from "./modules/fxModulesInstances/pitchshifterFX.js";
+import {
   trebleboostFX,
   trebleboostSwitch,
 } from "./modules/fxModulesInstances/trebleboostFX.js";
@@ -61,6 +65,9 @@ const fxModules = [];
 const fxButtons = [];
 
 // add the fx modules to the fxModules array
+// Pitch
+fxModules.push(pitchShifterFX); // pitch shifter module
+
 // Gains, Distortions, Overdrives
 fxModules.push(trebleboostFX); // treble boost module
 fxModules.push(distortionFX); // distortion module
@@ -84,6 +91,9 @@ fxModules.push(reverbFX); // reverb module
 fxModules.push(jcreverbFX); // jcreverb module
 
 // add the fx buttons to the fxButtons array
+// Pitch
+fxButtons.push(pitchShifterSwitch); // pitch shifter button
+
 // Gains, Distortions, Overdrives
 fxButtons.push(trebleboostSwitch); // treble boost button
 fxButtons.push(distortionSwitch); // distortion button

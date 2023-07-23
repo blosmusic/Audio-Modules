@@ -254,6 +254,7 @@ input[type="range"] {
   width: 20px;
   height: 20px;
   background-color: #00ff91;
+  border: #333 2px solid;
   border-radius: 100%;
   margin: -110px 0 0 15px;
   transform: translateX(-100px);
