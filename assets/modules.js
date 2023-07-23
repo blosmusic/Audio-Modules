@@ -15,6 +15,10 @@ import {
   bitcrusherSwitch,
 } from "./modules/fxModulesInstances/bitcrusherFX.js";
 import {
+  chebyshevDistortionFX,
+  chebyshevDistortionSwitch,
+} from "./modules/fxModulesInstances/chebydistortionFX.js";
+import {
   autowahFX,
   autowahSwitch,
 } from "./modules/fxModulesInstances/autowahFX.js";
@@ -62,6 +66,7 @@ fxModules.push(trebleboostFX); // treble boost module
 fxModules.push(distortionFX); // distortion module
 fxModules.push(distortionFX2); // distortion module 2
 fxModules.push(bitcrusherFX); // bitcrusher module
+fxModules.push(chebyshevDistortionFX); // chebyshev distortion module
 
 // Filters and EQs
 fxModules.push(autowahFX); // autowah module
@@ -84,6 +89,7 @@ fxButtons.push(trebleboostSwitch); // treble boost button
 fxButtons.push(distortionSwitch); // distortion button
 fxButtons.push(distortionSwitch2); // distortion button 2
 fxButtons.push(bitcrusherSwitch); // bitcrusher button
+fxButtons.push(chebyshevDistortionSwitch); // chebyshev distortion button
 
 // Filters and EQs
 fxButtons.push(autowahSwitch); // autowah button
