@@ -15,6 +15,10 @@ import {
   bitcrusherSwitch,
 } from "./modules/fxModulesInstances/bitcrusherFX.js";
 import {
+  autowahFX,
+  autowahSwitch,
+} from "./modules/fxModulesInstances/autowahFX.js";
+import {
   chorusFX,
   chorusSwitch,
 } from "./modules/fxModulesInstances/chorusFX.js";
@@ -59,6 +63,9 @@ fxModules.push(distortionFX); // distortion module
 fxModules.push(distortionFX2); // distortion module 2
 fxModules.push(bitcrusherFX); // bitcrusher module
 
+// Filters and EQs
+fxModules.push(autowahFX); // autowah module
+
 // Modulation
 fxModules.push(chorusFX); // chorus module
 fxModules.push(phaserFX); // phaser module
@@ -77,6 +84,9 @@ fxButtons.push(trebleboostSwitch); // treble boost button
 fxButtons.push(distortionSwitch); // distortion button
 fxButtons.push(distortionSwitch2); // distortion button 2
 fxButtons.push(bitcrusherSwitch); // bitcrusher button
+
+// Filters and EQs
+fxButtons.push(autowahSwitch); // autowah button
 
 // Modulation
 fxButtons.push(chorusSwitch); // chorus button
